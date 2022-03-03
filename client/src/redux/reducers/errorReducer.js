@@ -13,7 +13,7 @@ export const errors = (state = initialState,{ type,payload}) =>{
         case ActionTypes.GET_ERRORS:
             return {
                 data: payload.data,
-                status:payload.state,
+                status:payload.status,
                 id:payload.id
             };
         case ActionTypes.CLEAR_ERRORS:

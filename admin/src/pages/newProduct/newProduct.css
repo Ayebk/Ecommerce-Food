@@ -1,0 +1,109 @@
+.newProduct{
+    flex:6;
+    height: 100vh;
+    padding: 20px;
+}
+
+.newProductTitle{
+    margin-top: 30px;
+}
+
+.newProductForm{
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    border: solid rgba(151, 151, 151, 0.568) 1px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.newProductItem{
+    font-size: 20px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    margin: 10px 20px;
+}
+
+.newProductItem>label{
+    margin-bottom: 10px;
+}
+
+
+.newProductItem>input{
+    height: 25px;
+    font-size: 18px;
+    padding: 3px 7px;
+}
+
+
+.newProductItemDesc{
+    font-size: 20px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    margin: 10px 20px;
+}
+
+.newProductItemDesc>label{
+    margin-bottom: 10px;
+}
+
+
+.newProductItemDesc>textarea{
+   
+    font-size: 18px;
+    padding: 3px 7px;
+}
+
+.newProductButtonSubmit{
+    width: 140px;
+    border: none;
+    height: 40px;
+    background-color: rgb(7 144 254);
+    border-radius: 5px;
+    cursor:pointer; 
+    color:rgb(255, 255, 255);
+    font-size: 20px;
+    margin-top: 50px;
+}
+
+.newProductSelect{
+    font-size: 18px;
+}
+
+.newProductGender{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.newProductGenderOption>input{
+    margin-right: 8px;
+}
+
+.userUpdateWrapper{
+    display: flex;
+    padding: 0px 20px;
+}
+.userUpdateUpload{
+    margin-right: 30px;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .newProductTitle{
+        text-align-last: center;
+        padding-top: 25px;
+    }
+
+    .newProductContainerButton{
+        display: flex;
+        justify-content: center;
+    }
+    .newProductTitle{
+        margin-top: 0;
+    }
+
+}

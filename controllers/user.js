@@ -7,6 +7,8 @@ const CryptoJS = require("crypto-js");
 const routes = {
 
     userUpdate: async(req,res)=>{
+
+
     if(req.body.password){
         req.body.password = CryptoJS.AES.encrypt(
             req.body.password,
@@ -19,7 +21,7 @@ const routes = {
             req.params.id,
             {
                 $set: req.body,
-        }, {new:true});
+        }, {new:true,upsert: true});
         res.status(200).json(updatedUser);
     }catch(err){
         res.status(500).json(err);
@@ -81,6 +83,7 @@ userStates: async (req,res)=>{
                 total: {$sum:1},
             },},
         ])
+        console.log(data)
         res.status(200).json(data);
     }catch(err){
         res.status(500).json(err);

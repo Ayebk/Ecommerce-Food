@@ -18,12 +18,12 @@ router.get("/find/:id",verifyTokenAndAdmin, userGet)
 
 
 //GET ALL USERS
-router.get("/",verifyTokenAndAdmin, userGetAll)
+router.get("/",verifyTokenAndAdmin, userGetAll) //verifyTokenAndAdmin
 
 
 //GET USER STATS
 
-router.get("/stats", verifyTokenAndAdmin, userStates)
+router.get("/stats",verifyTokenAndAdmin , userStates) //verifyTokenAndAdmin
 
 
 module.exports = router;

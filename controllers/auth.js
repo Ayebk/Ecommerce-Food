@@ -10,6 +10,7 @@ const routs = {
 
 register: async(req, res) => {
 
+    console.log(JSON.stringify(req.body))
 
     const { username,email,password} = req.body;
 
@@ -24,12 +25,10 @@ register: async(req, res) => {
             message: error
         })
     }
-
     const newUser = new User({
         username: req.body.username,
         email: req.body.email,
         password: CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SEC).toString()
-        ,
     });
 
     try {
@@ -54,8 +53,7 @@ login:  async(req, res) => {
         
         const [user] = users;
 
-        console.log(user)
-
+        const userId = user.id;
         const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASS_SEC);
         const Originalpassword = hashedPassword.toString(CryptoJS.enc.Utf8);
 
@@ -71,8 +69,7 @@ login:  async(req, res) => {
         },process.env.JWT_SEC,{expiresIn:"3d"})
         
         const {password, ...others} = user._doc;
-
-        res.status(200).json({...others,accessToken});
+        res.status(200).json({...others,userId,accessToken});
     })
     }catch(error){
         res.status(500).json(error)

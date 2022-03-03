@@ -5,6 +5,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import FoodBankOutlinedIcon from '@mui/icons-material/FoodBankOutlined';
 import { silderItems } from '../data'
 import { mobile, laptop, tablet, desktop } from '../responsive'
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
@@ -210,8 +211,12 @@ const Slider = (props) => {
         }
 
     }
+    const navigate = useNavigate();
 
 
+    const nav = (link) =>{
+        navigate(link)
+    }
 
 
     return (
@@ -229,9 +234,11 @@ const Slider = (props) => {
                             <Desc>
                                 {item.desc}
                             </Desc>
-                            <Button>
+                            <Button onClick={ ()=> nav(item.link)}>
+                               
                                 <ButtonText> כנסו עכשיו</ButtonText>
                                 <IconFood style={{ fontSize: '50px' }} />
+                              
                             </Button>
                         </InfoContainer>
                         <ImageContainer>

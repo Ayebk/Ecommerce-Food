@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Advertisement from '../components/Advertisement'
 import Navbar from '../components/Navbar'
 import styled from 'styled-components'
@@ -6,6 +6,10 @@ import Footer from '../components/Footer'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { mobile, laptop, tablet, desktop } from '../responsive'
+import { clearProduct, getProduct } from '../redux/actions/productsActions'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { addToCart, updateCart } from '../redux/actions/cartActions'
 
 const Container = styled.div`
 
@@ -27,6 +31,7 @@ width: 90%;
 
 const ImgContainer = styled.div`
 flex:1;
+max-height: 600px;
 ${desktop({
     flex: 0.5
 })} 
@@ -46,6 +51,7 @@ const Image = styled.img`
     width: 100%;
     height: 100%;
     object-fit: scale-down;
+    margin-top: 30px;
 `
 const Title = styled.h1`
     padding: 10px;
@@ -71,12 +77,13 @@ ${mobile({
 })} 
 `
 const TitleDetails = styled.h2`
-    
-    font-size: 26px;
+    margin-bottom: 5px;
+    font-size: 28px;
 `
 const InfoTable = styled.table`
-    font-size: 20px;
-    margin-top: 5px;
+    margin-top: 30px;
+    font-size: 19px;
+    
     ${mobile({
     fontSize: "16px"
 })} 
@@ -183,7 +190,71 @@ const Price = styled.div`
  
 `
 
+const Tr = styled.tr`
+
+`
+
+const Td = styled.td`
+font-size: 20px;
+padding-left: 5px;
+`
+
 const Product = () => {
+
+
+    let id = useParams();
+    const dispatch = useDispatch();
+    const selectedProduct = useSelector((state) => state.products.selectedProduct);
+    const loggedUser = useSelector((state) => state.auth);
+    const cartProducts= useSelector((state) => state.cart.products);
+    const cart= useSelector((state) => state.cart);
+
+    const [quantity, setQuantity] = useState(1);
+
+
+    useEffect(() => {
+
+        getProduct(dispatch, id)
+        return () => {
+            clearProduct(dispatch)
+        }
+    }, [getProduct, id])
+
+
+    // const handleAdClick = ()=>{
+    //     updateCart(dispatch,selectedProduct,loggedUser) <------------- fix for cart update
+    // }
+
+    const handleAddClick = () => {
+ 
+        dispatch(addToCart({selectedProduct,quantity}))
+     }
+     
+     
+     useEffect(() => {
+      if(loggedUser.username)
+      updateCart(dispatch,cart ,loggedUser)
+     }, [cartProducts])
+
+
+
+   
+
+    const handleQuantity = (type) => {
+        if (type === "remove") {
+          quantity > 1 && setQuantity(quantity => quantity - 1);
+        } else {
+          setQuantity(quantity => quantity + 1);
+        }
+      };
+    
+      useEffect(() => {
+        console.log(quantity)
+    
+      }, [quantity])
+    
+
+
 
     return (
         <Container>
@@ -193,50 +264,39 @@ const Product = () => {
 
 
                 <InfoContainer>
-                    <Title>בשר בקר</Title>
+                    <Title>{selectedProduct ? selectedProduct.title : null}</Title>
                     <Desc>
-                        נתח מספר 13 - שייטל:
-                        הידוע גם כ- כנף העוקץ.
-                        <br />
-                        מה מאפיין את הנתח?
-                        נתח השייטל נמצא בשוק האחרוית של הבהמה בהמשך לסינטה, הנתח נחשב לנתח בעל אחוז שומן נמוך.
-                        הנתח מאופיין בצורת מימייה גדולה, לנתח יש סיבים קצרים אשר מקנות לו טעם בשרי מאוד.
-
-                        <br />
+                        {selectedProduct ? selectedProduct.desc : null}
 
                     </Desc>
                     <SmallDetails>
                         <TitleDetails>נתונים</TitleDetails>
-                        <InfoTable><tr>
-                            <td>מותג/יצרן:</td>
-                            <td>כללי</td>
-                        </tr>
-                            <tr>
-                                <td>מידה/סוג:</td>
-                                <td>קג</td>
-                            </tr>
-                            <tr>
-                                <td>מק"ט:</td>
-                                <td>4227128</td>
-                            </tr>
-                            <tr>
-                                <td>ארץ ייצור:</td>
-                                <td>צרפת</td>
-                            </tr>
+                        <Tr>
+                            <Td>רשת: </Td>
+                            {selectedProduct ? <b>{selectedProduct.brand}</b> : null}
+                            
+                            </Tr>
+                            <Tr>
+                            <Td>מק"ט: </Td>
+                            {selectedProduct ? selectedProduct.catalogNumber : null}
+                        </Tr>
+                        {selectedProduct?.details ? 
+                        <InfoTable>רכיבים: <br/> {selectedProduct?.details} 
                         </InfoTable>
+                        : null}
                         <Disclaimer>הנתונים המדויקים מופיעים על גבי המוצר.
                             התמונות והתאריכים המופיעים הינם להמחשה בלבד ואין להסתמך עליהם.</Disclaimer>
                     </SmallDetails>
-                    <Price><PriceShakel>₪</PriceShakel>20<PirceExtra>.90</PirceExtra></Price>
+                    <Price><PriceShakel>₪</PriceShakel>{selectedProduct ? selectedProduct.price : null}<PirceExtra></PirceExtra></Price>
 
 
                     <OrderContainer>
-                        <ButtonOrder>הוסף לסל</ButtonOrder>
+                        <ButtonOrder onClick={handleAddClick}>הוסף לסל</ButtonOrder>
                         <AmountContainer>
 
-                            <IconAdd fontSize='large' />
-                            <InputAmount defaultValue="0" type="text" />
-                            <IconRemove fontSize='large' />
+                            <IconAdd onClick={() => handleQuantity("add")} fontSize='large' />
+                            <InputAmount value={quantity}  />
+                            <IconRemove  onClick={() => handleQuantity("remove")} fontSize='large' />
 
                         </AmountContainer>
 
@@ -244,7 +304,7 @@ const Product = () => {
 
                 </InfoContainer>
                 <ImgContainer>
-                    <Image src="https://cdn.pixabay.com/photo/2016/11/10/16/29/beef-1814638_960_720.png" />
+                    <Image src={selectedProduct ? selectedProduct.img : null} />
                 </ImgContainer>
             </Wrapper>
 

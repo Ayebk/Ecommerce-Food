@@ -4,7 +4,7 @@ const router = require("express").Router();
 const { verifyTokenAndAuthorization, verifyTokenAndAdmin, verfityToken } = require("./verfiyToken")
 const CryptoJS = require("crypto-js");
 
-const { createOrder, updatedOrder, deleteOrder, getUserOrder, getAllOrders, getMonthIncome} = require("../controllers/order")
+const { createOrder, updatedOrder, deleteOrder, getUserOrder, getAllOrders, getMonthSales ,getMonthIncomeApproved , getMonthRevanue,getMostSales} = require("../controllers/order")
 
 //CREATE
 
@@ -25,10 +25,23 @@ router.get("/find/:userId", verifyTokenAndAuthorization,getUserOrder)
 
 // //GET ALL 
 
-router.get("/", verifyTokenAndAdmin,getAllOrders)
+router.get("/",getAllOrders) // -->verifyTokenAndAdmin
 
-// GET MONTHLY INCOME
+// GET MONTHLY PRODUCT SALES
 
-router.get("/income", verifyTokenAndAdmin,getMonthIncome);
+router.get("/salesProduct",getMonthSales); // --->verifyTokenAndAdmin
+
+// GET MONTHLY REVANUE (Based on Approved and Pending Transactions)
+
+router.get("/revanue",getMonthRevanue); // --->verifyTokenAndAdmin
+
+// GET MONTHLY INCOME APPROVED (Based on  only Approved Transactions)
+
+router.get("/incomeApproved", verifyTokenAndAdmin,getMonthIncomeApproved);
+
+
+// GET MOST PRODUCT SALES
+
+router.get("/salesMostProduct",getMostSales); // --->verifyTokenAndAdmin
 
 module.exports = router;

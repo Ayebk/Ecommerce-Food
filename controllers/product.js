@@ -1,6 +1,9 @@
 
 const Product  = require("../models/Product");
 
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 const routes = {
 
@@ -8,7 +11,7 @@ const routes = {
 
 createProduct:async (req,res)=>{
     const newProduct = new Product(req.body);
-
+    console.log("llllllaaaaaaaaaaaa =======  " + JSON.stringify(req.body))
     try{
         const savedProduct = await newProduct.save();
         res.status(200).json(savedProduct)
@@ -23,7 +26,7 @@ createProduct:async (req,res)=>{
 
 //UPDATE 
 updatedProduct: async(req,res)=>{
-   
+    console.log("tttttttttttttttttttttt ---------   " +  JSON.stringify(req.body) )
     try{
         const updatedProduct = await Product.findByIdAndUpdate(
             req.params.id,
@@ -50,6 +53,8 @@ deleteProduct: async(req,res)=>{
 
 //GET Product
 getProduct: async(req,res)=>{
+
+    
     try{
         const product = await Product.findById(req.params.id)
         res.status(200).json(product);
@@ -59,6 +64,29 @@ getProduct: async(req,res)=>{
 
     }
 },
+
+//SEARCH Products
+searchProduct: async(req,res)=>{
+
+    const text = req.params.text;
+    const regex = new RegExp(escapeRegex(text), 'gi');
+    try{
+
+        const products = await Product.find({ "title": regex }).sort('-createdAt').then((products) => {
+            res.status(200).json({
+                products
+            })
+        })
+
+        // const product = await Product.findById(req.params.text)
+
+
+    }catch(err){
+        res.status(500).json(err)
+
+    }
+},
+
 
 
 //GET ALL Products
@@ -89,6 +117,8 @@ getAllProducts: async(req,res)=>{
 
     }
 }
+
+
 
 }
 

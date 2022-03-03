@@ -1,9 +1,13 @@
 import Home from "./pages/Home"
+import Search from "./pages/Search"
 import Product from "./pages/Product";
 import ProductList from "./pages/ProductList";
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Cart from './pages/Cart'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 import {
   BrowserRouter as Router,
@@ -11,6 +15,7 @@ import {
   Routes,
   Navigate
 } from "react-router-dom";
+import Stores from "./pages/Stores";
 
 
 function App() {
@@ -27,10 +32,23 @@ function App() {
 
   return (
     <Router>
+            <ToastContainer
+                position="top-right"
+                hideProgressBar={true}
+                autoClose={false}
+                newestOnTop={true}
+                closeOnClick={false}
+                draggable={false}
+                rtl={false}
+                limit="1"
+            />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/product/:id" element={<Product />} />
+        <Route path="/search/:text" element={<Search />} />
+        <Route path="/search/:text" element={<Search />} />
+        <Route path="/stores" element={<Stores />} />
         <Route path="/products/:category" element={<ProductList />} />
+        <Route path="/product/:id" element={<Product />} />
         <Route path="/cart/:id" element={<Cart />} />
         <Route
           path='/login'
@@ -45,6 +63,7 @@ function App() {
           </RegisterWrapper>}
         />
       </Routes>
+
     </Router>
   );
 }

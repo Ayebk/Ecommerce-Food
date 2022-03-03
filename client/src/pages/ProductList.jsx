@@ -8,7 +8,7 @@ import Footer from '../components/Footer'
 import { mobile, laptop, tablet, desktop } from '../responsive'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { getProducts } from '../redux/thunk/apiCalls'
+import { getProducts } from '../redux/actions/productsActions'
 
 
 const Container = styled.div`
@@ -88,12 +88,12 @@ const ProductList = () => {
 
     const brands = ["sweets","breads","meats","drinks","cheese","pizza"]
     const [filters,setFilters]= useState({category:`${category}`});
-    const [sort,setSort]= useState("name");
+    const [sort,setSort]= useState("asc");
 
 
 
     useEffect(() => {
-
+     
         console.log("aaaaaa  " + category )
         getProducts(dispatch, { category });
 
@@ -145,9 +145,8 @@ const ProductList = () => {
                     <ProductSorted>
                         <ProductFilterTitle>בחר סדר:</ProductFilterTitle>
                         <Select  name="order" onChange={e=> setSort(e.target.value)}>
-                                <Option value="name" selected >שם</Option>
-                                <Option value="asc" >מחיר ⇧</Option>
-                                <Option value="desc" >מחיר ⇩</Option>
+                                <Option value="asc" >מחיר מהזול</Option>
+                                <Option value="desc" >מחיר מהיקר</Option>
                             </Select>
                     </ProductSorted>
                 </WrapperFilter>

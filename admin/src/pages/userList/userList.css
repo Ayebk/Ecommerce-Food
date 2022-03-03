@@ -1,0 +1,59 @@
+.userList{
+    flex:6;
+    padding: 30px 20px;
+    height: 100vh;
+}
+
+.userListUser{
+    align-items: center;
+    display: flex;
+}
+.userListTitle{
+    font-size: 30px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+.userListImg{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.userListEditButton{
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: rgb(218 218 218);
+    cursor: pointer;
+    font-size: 17px;
+    margin-right: 3px;
+}
+
+.userListDelete{
+    margin-left: 100%;
+    cursor: pointer;
+}
+
+.userListEdit{
+    display: flex;
+    align-items: center;
+  
+    
+}
+
+@media only screen and (max-width: 600px) {
+
+
+.userList{
+    flex:6;
+    padding: 30px 2px;
+    height: 100vh;
+}
+
+.userListTitle{
+    text-align-last: center;
+}
+
+}

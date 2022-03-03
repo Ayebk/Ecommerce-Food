@@ -1,5 +1,5 @@
-import { SettingsSystemDaydreamOutlined } from '@mui/icons-material'
-import React, { useState } from 'react'
+import { SettingsSystemDaydreamOutlined, WindowSharp } from '@mui/icons-material'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
@@ -7,7 +7,8 @@ import Advertisement from '../components/Advertisement'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import { loadingUser } from '../redux/actions/authActions'
-import { loginUser } from '../redux/thunk/apiCalls'
+import { loginUser } from '../redux/actions/authActions'
+import { getCart } from '../redux/actions/cartActions'
 import { mobile, laptop, tablet, desktop } from '../responsive'
 
 const Container = styled.div`
@@ -91,7 +92,7 @@ const Button = styled.button`
    background-color: #a0d3f8;
    transform: scale(1.1);
  }
- ${tablet({ width:" 250px", fontSize:"25px"})}
+ ${tablet({ width: " 250px", fontSize: "25px" })}
 `
 
 const Link = styled.a`
@@ -115,41 +116,64 @@ const Error = styled.span`
 
 const Login = () => {
 
-    const [email,setEmail]=useState("");
-    const [password,setPassword]=useState("");
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-    const handleSumbit = (e) => {
-        e.preventDefault();
-        loginUser(dispatch, { email, password }).then(navigate("/"));
-        
-      };
-      // const { isFetching, error } = useSelector((state) => state.user);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const loggedUser = useSelector((state) => state.auth); 
+  let res = null;
 
 
-    return (
 
-        <Container>
-            <Navbar />
-            <Advertisement />
-      
-            <WrapperContainer>
-            <Wrapper>
-                <Title>התחברות</Title>
-                <Form onSubmit={handleSumbit} >
-                    <Input type="email" placeholder="אימייל" onChange={(e)=> setEmail(e.target.value)}/>
-                    <Input type="password" min="6" placeholder="סיסמה"  onChange={(e)=> setPassword(e.target.value)}/>
-                    <Button  type="submit">כניסה לחשבון</Button>
-                    {/* {error && <Error>Something went wrong...</Error>} */}
-                    <Link>שכחת סיסמה?</Link>
-                    <Link>אין לך חשבון?</Link>
-                </Form>
-            </Wrapper>
-            </WrapperContainer>
-            <Footer />
-        </Container>
-    )
+
+
+  let handleSumbit = async (e) => {
+    e.preventDefault();
+
+    const res = await loginUser(dispatch, { email, password })
+
+    if(res && loggedUser){
+     navigate("/")
+    //  window.location.reload();
+    }
+  }
+
+
+
+
+  
+
+
+  // .then(() => {window.location.reload()}).then(navigate("/")).catch(console.log("aaaaaaaaaaaaaaaaa"))
+
+  // loginUser(dispatch, { email, password }).then(() => {window.location.reload()}).then(navigate("/")).catch(console.log("aaaaaaaaaaaaaaaaa"))
+
+
+
+
+
+  return (
+
+    <Container>
+      <Navbar />
+      <Advertisement />
+
+      <WrapperContainer>
+        <Wrapper>
+          <Title>התחברות</Title>
+          <Form onSubmit={handleSumbit} >
+            <Input type="email" placeholder="אימייל" onChange={(e) => setEmail(e.target.value.toLowerCase())} />
+            <Input type="password" min="6" placeholder="סיסמה" onChange={(e) => setPassword(e.target.value)} />
+            <Button type="submit">כניסה לחשבון</Button>
+            {/* {error && <Error>Something went wrong...</Error>} */}
+            <Link>שכחת סיסמה?</Link>
+            <Link>אין לך חשבון?</Link>
+          </Form>
+        </Wrapper>
+      </WrapperContainer>
+      <Footer />
+    </Container>
+  )
 }
 
 export default Login

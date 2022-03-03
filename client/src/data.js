@@ -2,10 +2,11 @@
 export const silderItems = [
   {
     id: 1,
-    img: "https://cdn.pixabay.com/photo/2020/05/17/04/36/basket-5179971_1280.jpg",
-    title: "המבצעים החמים של החודש",
-    desc: "המוצרים שלא כדאי לפספס החודש. כנסו!",
+    img: "https://cdn.pixabay.com/photo/2020/04/03/12/53/drink-4998753_960_720.png",
+    title: "להתרענן ולהרגיש כמו חדש",
+    desc: "המשקאות החדשים  היגעו למדפים !",
     bgc: "ffffff",
+    link:"/products/drinks"
   },
   {
     id: 2,
@@ -13,6 +14,7 @@ export const silderItems = [
     title: "טעמת את הקפה הזה?",
     desc: "כל קפה שרצית ולא ידעת עליו !",
     bgc: "f0f8ff",
+    link:"/products/coffee"
   },
   {
     id: 3,
@@ -20,8 +22,47 @@ export const silderItems = [
     title: "משהו חדש ומפתיע?",
     desc: "תהיו המובלים שיטעמו את המוצרים החדשים!",
     bgc: "faebd7",
+    link:"/products/sweets"
   },
 ];
+
+
+export const stores = [
+  {
+    id: 1,
+    img: "https://res.cloudinary.com/dzy0uevma/image/upload/v1645709733/e-commerce/jviolz6kssyvbtqivlp5.png",
+    title: "FoodNow",
+    desc: "זו היא הרשת שלנו, בה אתה נמצא כעת. חברה ציבורית ישראלית המפעילה רשתות וחניות  ברחבי ישראל. החברה הוקמה בשנת 2021",
+    bgc: "ffffff",
+    
+  },
+  {
+    id: 2,
+    img: "https://cdn.pixabay.com/photo/2014/04/03/10/00/shopping-cart-309592_960_720.png",
+    title: "סופר סלים",
+    desc: " סופרמרקט המוביל במדינה בשיווק מזון ומוצרים נלווים ",
+    bgc: "f0f8ff",
+    
+  },
+  {
+    id: 3,
+    img: "https://cdn.pixabay.com/photo/2015/02/26/09/16/shopping-650046_960_720.png",
+    title: "יבגני בע''מ",
+    desc: "רשת חנויות מוצלחת, כיום מציעה  ללקוחותיה מגוון מוצרים תחת המותג - יבגני בע''מ",
+    bgc: "faebd7",
+  
+  },
+  {
+    id: 4,
+    img: "https://cdn.pixabay.com/photo/2012/04/26/13/07/pizza-42443_960_720.png",
+    title: "PizzaWorld",
+    desc: "מותג מוביל בארץ בתחום כל המגוון הפיצות שיש",
+    bgc: "faebd7",
+  
+  },
+
+];
+
 
 
 export const categories = [
@@ -43,7 +84,7 @@ export const categories = [
     id: 3,
     img: "https://cdn.pixabay.com/photo/2014/07/08/14/33/breads-387544_1280.jpg",
     title: "לחמים",
-    cat: "beards"
+    cat: "breads"
   },
 
   {
@@ -80,74 +121,4 @@ export const categories = [
 
 
 
-export const popularProducts = [
-  {
-    id:1,
-    img:"https://cdn.pixabay.com/photo/2016/11/10/16/29/beef-1814638_960_720.png",
-    price: "15",
-    priceDesc:"לק''ג",
-    title:"בשר בקר",
-    brand:"FoodNow"
-  },
-  {
-    id:2,
-    img:"https://cdn.pixabay.com/photo/2017/04/04/16/55/chocolate-2201991_960_720.jpg",
-    price: "4",
-    priceExtra:".90",
-    priceDesc:"",
-    title:"שוקולד",
-    brand:"סופר סלים"
-  },
-  {
-    id:3,
-    img:"https://cdn.pixabay.com/photo/2018/04/03/18/26/fresh-bread-3287600_960_720.jpg",
-    price: "5",
-    priceDesc:"",
-    title:" עוגיות לחם",
-    brand:"FoodNow"
-  },
-  {
-    id:4,
-    img:"https://cdn.pixabay.com/photo/2017/02/02/14/04/grapes-2032838_960_720.jpg",
-    price: "6",
-    priceDesc:"לק''ג",
-    title:"ענבים",
-    priceExtra:".90",
-    brand:"יבגני בע''מ"
-  },
-  {
-    id:5,
-    img:"https://cdn.pixabay.com/photo/2020/06/13/20/25/soda-5295697_960_720.png",
-    price: "3",
-    priceDesc:"500 מ''ל",
-    title:"פפסי קולה",
-    brand:"FoodNow"
-  },
-  {
-    id:6,
-    img:"https://cdn.pixabay.com/photo/2016/03/05/21/47/american-1239091_960_720.jpg",
-    price: "29",
-    priceExtra:".90",
-    priceDesc:"",
-    title:"פיצה גדולה",
-    brand:"PizzaWorld"
-  },
-  {
-    id:7,
-    img:"https://cdn.pixabay.com/photo/2017/06/27/22/21/banana-2449019_960_720.jpg",
-    price: "8",
-    priceExtra:".90",
-    priceDesc:"לק''ג",
-    title:"בננה",
-    brand:"FoodNow"
-  },
-  {
-    id:8,
-    img:"https://cdn.pixabay.com/photo/2021/04/11/18/08/cheddar-6170473_960_720.jpg",
-    price: "9",
-    priceDesc:"",
-    title:"גבינה צהובה",
-    brand:"FoodNow"
-  },
 
-]

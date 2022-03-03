@@ -6,7 +6,6 @@ import { mobile, laptop, tablet, desktop } from '../responsive'
 import axios from 'axios'
 import { axiosInstance } from '../confing'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProducts } from '../redux/thunk/apiCalls'
 
 const Container = styled.div`
     display: flex;
@@ -25,26 +24,22 @@ const Container = styled.div`
 
 const Products = ({ category, filters, sort }) => {
 
-
+    console.log(category)
+    console.log(filters)
     const products = useSelector((state) => state.products.products);
     const [filteredProducts, setFilteredProducts] = useState([]);
-
 
   
    
     useEffect(() => {
 
         let unmounted = false;
-        console.log(products)
-        console.log(filters)
-        console.log(products.category)
         if (category && (filters.brand == null || filters.brand == "all" ) && !unmounted) {
             
             const filtered = products.filter((item) => item.categories == filters.category )
             setFilteredProducts(filtered)
    
 
-            console.log(filtered)
         }
         
         else if (category && !unmounted) {
@@ -52,16 +47,22 @@ const Products = ({ category, filters, sort }) => {
             setFilteredProducts(filtered)
    
 
-            console.log(filtered)
         }
         return () => { unmounted = true };
     }, [category, filters, products])
 
-    console.log(filteredProducts)
+    console.log(sort)
+
     return (
         <Container>
-            {filteredProducts.map((item) => (
-                <Product item={item} key={item.id} />
+            {filteredProducts.sort((a,b)=>{
+                if(sort == 'asc'){
+                   return a.price-b.price
+                }else{
+                    return  b.price-a.price
+                }
+            }).map((item,index) => (   // index only for cypress-test !
+                <Product item={item} key={item._id} index={index} />
             ))}
         </Container>
     )

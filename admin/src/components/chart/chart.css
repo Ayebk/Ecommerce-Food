@@ -1,0 +1,31 @@
+.chart{
+    padding-right: 25px;
+    
+
+}
+
+.chartWrapper{
+    margin-left: 20px;
+}
+
+.chartTitle{
+    font-size: 24px;
+    margin-bottom: 20px;
+    
+}
+
+.chartBlocked{
+    color: transparent;
+    text-shadow: 0 0 5px rgb(0 0 0 / 50%);
+    filter: blur(6px);
+}
+
+@media only screen and (max-width: 600px) {
+    .chart{
+        margin-top: 5px;
+        padding: 5px;
+        height: 100px;
+        margin-top: 5px;
+    
+    }
+}

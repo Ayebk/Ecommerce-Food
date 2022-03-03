@@ -1,0 +1,167 @@
+.widgetLg{
+    flex: 2;
+    box-shadow: 0px 0px 16px -6px rgb(0 0 0 / 75%);
+    margin-right: 20px;
+    padding: 20px;
+    
+}
+
+
+.widgetLgTitle{
+    font-size: 24px;
+    font-weight: bold;
+
+}
+
+.widgetLgTable{
+    width: 100%;
+    border-spacing: 20px;
+}
+
+.widgetLgTh{
+    text-align: left;
+    font-size: 18px;
+    font-weight: 500;
+}
+.widgetLgUser{
+    display: flex;
+    align-items: center;
+    
+}
+
+.widgetLgName{
+    font-size: 20px;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.widgetLgDate{
+    font-size: 21px;
+}
+
+.widgetLgAmount{
+    font-size: 21px;
+}
+
+
+
+
+.widgetLgImg{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+
+}
+
+.widgetLgButton{
+    font-size: 21px;
+    padding: 5px 7px;
+    border:none;
+    border-radius: 10px;
+    width: 119px;
+}
+
+.widgetLgButton.Approved{
+    background-color: #4caf50;
+    color: white;
+
+}
+
+
+.widgetLgButton.Decline{
+    background-color: rgb(252 85 73);
+    color: white;
+}
+
+
+.widgetLgButton.Pending{
+    background-color: rgb(52 7 255 / 0%);
+
+}
+
+.widgetLgThAmount {
+    font-size: 25px;
+    font-weight: 500;
+    text-align: end;
+    padding: 3px;
+}
+
+
+
+@media only screen and (max-width: 1550px) {
+    .widgetLg{
+        margin-bottom: 20px;
+    }
+    
+}
+
+
+@media only screen and (max-width: 600px) {
+    .widgetLg{
+        flex: 1;
+    box-shadow: 0px 0px 16px -6px rgb(0 0 0 / 75%);
+    margin-right: 0px;
+        padding: 10px 0px;
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    .widgetLgImg{
+    display: none;
+    }
+
+    .widgetLgButton{
+        font-size: 21px;
+        padding: 5px 7px;
+        border:none;
+        border-radius: 10px;
+        width: 2px;
+        height: 4px;
+        border-radius: 50%;
+        font-size: 20px;
+    }
+    
+    .widgetLgButton.Approved{
+        background-color: #4caf50;
+        color: white;
+        font-size:0;
+    }
+    
+    .widgetLgButton.Decline{
+        background-color: rgb(252 85 73);
+        color: white;
+        font-size:0;
+    }
+    
+    
+    .widgetLgButton.Pending{
+        background-color: rgb(52 7 255 / 0%);
+    }
+    
+    .widgetLgTable {
+        width: 100%;
+        border-spacing: 20px;
+    }
+    .widgetLgButton.Pending{
+        background-color: #ffc107;
+        color: white;
+        font-size:0;
+    }
+    .widgetLgTh {
+        font-size: 15px;
+    }
+
+
+    .widgetLgDate {
+        font-size: 18px;
+    }
+    .widgetLgName {
+        font-size: 19px;
+        margin-left: 0px;
+        overflow: hidden;
+  text-overflow: ellipsis;
+  width: 120px;
+    }
+}
+

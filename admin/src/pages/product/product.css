@@ -1,0 +1,320 @@
+.product{
+    flex:6;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.productTitleContainer{
+    display: flex;
+    align-items: center;
+    place-content: center;
+}
+
+
+
+
+
+.prodcutName{
+    font-size: 25px;
+    margin: 10px 0px;
+}
+
+.productInfiImg{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+ 
+}
+
+.productTopRight{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: auto;
+}
+
+.productInfoKey{
+    font-size: 22px;
+    font-weight: 300;
+    margin-right: 6px;
+    margin-top: 4px;
+    
+}
+
+.productInfoValue{
+    font-size: 23px;
+    font-weight: 500;
+    direction: rtl;
+    width: 80%;
+    margin-bottom:10px;
+}
+
+
+.productInfoItem{ 
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid rgba(57, 120, 255, 0.568) 1px;
+}
+
+
+
+
+.productInfoItemDesc{
+    border-bottom: solid rgba(57, 120, 255, 0.568) 1px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.productSales{
+flex: 2;
+margin-top: 10px;
+padding: 20px;
+height: fit-content;
+min-width: 320px;
+justify-content: center;
+}
+
+.productInfo{
+    flex: 2;
+    padding: 20px;
+    border: solid rgba(57, 120, 255, 0.568) 1px;
+border-radius: 10px;
+    margin: 0px 20px 20px 20px ;
+    height: fit-content;
+}
+
+.productAddButton{
+    width: 160px;
+    border: none;
+    height: 40px;
+    background-color: rgb(7 144 254);
+    border-radius: 5px;
+    cursor:pointer; 
+    color:rgb(255, 255, 255);
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+
+.productUpdateForm{
+    display: flex;
+    justify-content: center;
+}
+
+.break {
+    flex-basis: 100%;
+    height: 0;
+  }
+
+.productUpdate{
+    
+    height: fit-content;
+    align-items: flex-start;   
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    font-weight: 800;
+    border: solid rgba(57, 120, 255, 0.568) 1px;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 0px 20px;
+    min-width: 450px;
+
+}
+
+.productUpdateImg{
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+
+
+.productUpdateTitle{
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.productUpdateItem{
+    margin-top: 30px;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.productUpdateItemoption{
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.productUpdateItemDesc{
+    margin-top: 30px;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.productEditLabelInput{
+    width: 250px;
+}
+
+.productEditLabelInputoption{
+   font-size: 17px;
+   width: 80px;
+}
+
+.productUpdateInput{
+    font-size: 17px;
+    padding: 3px;
+}
+
+.productUpdateInputDesc{
+    font-size: 17px;
+    padding: 3px;
+    width: 500px;
+}
+
+.productUpdateRight{
+    margin-top: 50px;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.productButtonCreate{
+    margin-top: 30px;
+    height: 20px;
+}
+
+
+.productUpdateUpload{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.productUpdateButton{
+    margin-top: auto;
+    
+    width: 140px;
+    border: none;
+    height: 34px;
+    background-color: rgb(7 144 254);
+    border-radius: 5px;
+    cursor:pointer; 
+    color:rgb(255, 255, 255);
+    font-size: 20px;
+}
+
+
+
+@media only screen and (max-width: 1200px) {
+
+
+    .productUpdateForm{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .productUpdateInputDesc{
+        font-size: 17px;
+        padding: 3px;
+        width: 400px;
+    }
+
+
+    .productUpdate{
+    
+        height: fit-content;
+        align-items: flex-start;   
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        font-weight: 800;
+        border: solid rgba(57, 120, 255, 0.568) 1px;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 10px 0px;
+        width: 350px;
+        margin: 10px 0px;
+
+    
+    }
+
+    .product{
+        flex:6;
+        padding: 20px;
+        display: flex;
+        
+        flex-direction: column;
+        
+    }
+    
+    .productTitleContainer{
+        display: flex;
+        align-items: none;
+        flex-direction: column;
+    }
+
+    .productTopLeft{
+        margin-top: 50px;
+    }
+
+    .productInfo {
+        
+        flex: 2 1;
+        padding: 20px;
+        border: solid rgba(57, 120, 255, 0.568) 1px;
+        border-radius: 10px;
+        margin: 0px 0px;
+        height: 300px;
+        width: fit-content;
+    }
+
+    .productSales {
+        flex: 2 1;
+        padding: 20px;
+        height: fit-content;
+        margin: 20px 0px;
+        justify-content: center;
+        min-width: 220px;
+    }
+    .productButtonCreateOn{
+        display: flex;
+        justify-content: center;
+    }
+
+ 
+    
+}
+
+@media only screen and (max-width: 550px) {
+    .productUpdate{
+        text-align-last: center;
+        width: fit-content;
+        min-width: 220px;
+        display: flex;
+        align-self: center;
+        align-items: center;   
+    }
+
+    .productUpdateInputDesc{
+        font-size: 17px;
+        padding: 3px;
+        width: fit-content;
+    }
+
+    .productUpdateRight{
+        margin-top: 50px;
+        margin-left: 0px;
+        display: flex;
+        flex-direction: column;
+    }
+
+}

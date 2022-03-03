@@ -1,0 +1,104 @@
+.newUser{
+    flex:6;
+    font-size: 30px;
+    margin-top: 40px;
+    height: 100vh;
+    padding: 20px;
+}
+
+
+.newUserTitle{
+    margin-top: 30px;
+
+}
+.newUserForm{
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    border: solid rgba(151, 151, 151, 0.568) 1px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.newUserItem{
+    font-size: 20px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    margin: 10px 20px;
+}
+
+.newUserItem>label{
+    margin-bottom: 10px;
+}
+
+
+.newUserItem>input{
+    height: 25px;
+    font-size: 18px;
+    padding: 3px 7px;
+}
+
+.newUserButtonSubmit{
+    width: 140px;
+    border: none;
+    height: 40px;
+    background-color: rgb(7 144 254);
+    border-radius: 5px;
+    cursor:pointer; 
+    color:rgb(255, 255, 255);
+    font-size: 20px;
+    margin-top: 50px;
+}
+
+.newUserSelect{
+    font-size: 18px;
+}
+
+.newUserGender{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.newUserGenderOption>input{
+    margin-right: 8px;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .newUser{
+        flex:6;
+        margin-top: 0px;
+    
+    }
+    .newUserTitle{
+        margin-top: 30px;
+        text-align-last: center;
+
+    }
+
+    
+.newUserButtonSubmit{
+    width: 140px;
+    border: none;
+    height: 40px;
+    background-color: rgb(7 144 254);
+    border-radius: 5px;
+    cursor:pointer; 
+    color:rgb(255, 255, 255);
+    font-size: 20px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+.newUserContainerButton{
+    display: flex;
+    justify-content: center;
+}
+
+.newUserTitle{
+    margin-top: 0px;
+    padding-top: 25px;
+}
+}

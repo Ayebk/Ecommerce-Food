@@ -13,9 +13,6 @@ router.post("/",verfityToken,createCart) // verfityToken <---- any users and mak
 
 
 
-
-
-
 //UPDATE 
 router.put("/:id",verifyTokenAndAuthorization,updatedCart);
 
@@ -23,7 +20,7 @@ router.put("/:id",verifyTokenAndAuthorization,updatedCart);
 router.delete("/:id",verifyTokenAndAuthorization, deleteCart)
 
 //GET User Cart
-router.get("/find/:userId", verifyTokenAndAuthorization,getUserCart)
+router.get("/find/:id", verifyTokenAndAuthorization,getUserCart)
 
 // //GET ALL 
 router.get("/",verifyTokenAndAdmin,getAllCarts)

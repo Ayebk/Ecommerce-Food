@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Advertisement from '../components/Advertisement'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
-import {  registerUser } from '../redux/thunk/apiCalls'
+import {  loginUser, registerMes, registerUser, resetMes } from '../redux/actions/authActions'
 import { mobile, laptop, tablet, desktop } from '../responsive'
+import { toast } from 'react-toastify';
 
 const Container = styled.div`
 
@@ -103,17 +105,62 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [passwordAgain, setPasswordAgain] = useState("");
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const loggedUser = useSelector((state) => state.auth._id);
 
-    const handleSumbit = (e) => {
+    const notifySuccess = () => toast.success('הרשמה בוצעה בהצלחה !', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+    
+    function debounce(func, timeout = 300){
+      let timer;
+      return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => { func.apply(this, args); }, timeout);
+      };
+    }
+    
+    
+    const processDelayMes = debounce(() => notifySuccess());
+
+
+    const handleSumbit = async(e) => {
         e.preventDefault();
         console.log(password)
         if (password != passwordAgain) {
         } else {
-            registerUser(dispatch, {username, email, password });
-
+            const res = await registerUser(dispatch, {username, email, password });
+            if(res){
+                processDelayMes();
+                navigate('/login')
+                
+            }
         }
 
     }
+
+
+    // useEffect(() => {
+
+    //     const log = async() =>{
+
+    //    if(loggedUser){
+    //     const res = await loginUser(dispatch, { email, password })
+
+    //     if(res){
+    //      navigate("/");
+    //      window.location.reload();
+    //     }
+    //    }
+    // }
+    // log();
+    // }, [dispatch])
 
           // const { isFetching, error } = useSelector((state) => state.user);
 
@@ -133,7 +180,7 @@ const Register = () => {
                     <Title>הרשמה</Title>
                     <Form onSubmit={handleSumbit}>
                         <Input required type="username" pattern="[A-Za-z]+.{5,}" title=" אנא הזן רק באנגלית כאורך 5 תווים" placeholder="שם פרטי" onChange={(e) => setUsername(e.target.value)} />
-                        <Input required  type="email" title="Please Provide A Valid Email Address !" placeholder="דואר אלקטרוני"  onChange={(e) => setEmail(e.target.value)} />
+                        <Input required  type="email" title="Please Provide A Valid Email Address !" placeholder="דואר אלקטרוני"  onChange={(e) => setEmail(e.target.value.toLowerCase())} />
                         <Input required type="password" pattern="(?=.*\d)(?=.*[A-Z]).{8,}"   title="כל סיסמה חייבת להכיל לפחות 8 תווים עם אות גדולה " placeholder=" סיסמה" onChange={(e) => setPassword(e.target.value)} />
                         <Input required type="password" placeholder=" אימות סיסמה" onChange={(e) => setPasswordAgain(e.target.value)} />
                         {/* {error && <Error>Something went wrong...</Error>} */}

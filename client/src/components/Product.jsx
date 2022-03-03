@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { mobile, laptop, tablet, desktop } from '../responsive'
+import { useNavigate } from 'react-router-dom';
+import { addToCart, updateCart } from '../redux/actions/cartActions';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Container = styled.div`
     position: relative;
@@ -16,19 +19,23 @@ const Container = styled.div`
     max-height: fit-content;
     padding: 10px;
     overflow: hidden;
-    ${desktop({   maxWidth: "250px",
-    maxHeight: "450px",
-    minWidth: "auto",marginTop:"auto",height:"450px",
-    objectFit: "scale-down" })}
-    ${tablet({ maxWidth: "250px",minWidth:"215px" })}
-    ${mobile({minWidth:"124px",maxHeight: "366px" })}
+    ${desktop({
+  maxWidth: "250px",
+  maxHeight: "450px",
+  minWidth: "auto", marginTop: "auto", height: "450px",
+  objectFit: "scale-down"
+})}
+    ${tablet({ maxWidth: "250px", minWidth: "215px" })}
+    ${mobile({ minWidth: "150px", maxHeight: "366px" })}
    
   
 `
 const Main = styled.div`
- ${desktop({ position: "absolute",
+ ${desktop({
+  position: "absolute",
   bottom: "0",
-  left: "0"})};
+  left: "0"
+})};
 
 `
 
@@ -46,8 +53,10 @@ const Image = styled.img`
  pointer-events:none;
 
 
- /* ${mobile({  width: "100%",
-    height: "100%"  })} */
+ /* ${mobile({
+  width: "100%",
+  height: "100%"
+})} */
 
 `
 
@@ -60,13 +69,16 @@ const Circle = styled.div`
   position: relative;
   right: 45px;
   cursor: pointer;
-  ${desktop({  right: "0" ,margin:"0px auto"  })}
-  ${mobile({ width:"150px",height:"150px"})}
+
+  
+  ${desktop({ right: "0", margin: "0px auto" })}
+  ${mobile({ width: "150px", height: "150px" })}
 
 
   &:hover {
     ${Image}{
         transform: scale(1.2);
+
         &:active {
     transform: scale(1.4);
     background-color: white;
@@ -87,6 +99,14 @@ const IconWrapper = styled.div`
     justify-content:center;
     margin-top: 15px;
     /* display: none; */
+    transition: 0.2s;
+    /* visibility: hidden; */
+    
+    opacity: ${props => props.toggle === true && "1"};
+    margin-top: ${props => props.toggle === true && "15px"};
+    opacity: ${props => props.toggle === false && "0"};
+    margin-top: ${props => props.toggle === false && "0"};
+
 
 `
 
@@ -121,7 +141,7 @@ const MoreInfoWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content:space-between;
-    ${mobile({ })}
+    ${mobile({})}
 
     
 
@@ -133,13 +153,13 @@ const Price = styled.div`
     font-family: fantasy;
     font-weight: 500;
     text-align-last: end; 
-    ${desktop({ 
-         position: "absolute",
-    top:"0", 
-    left:"0"
+    ${desktop({
+  position: "absolute",
+  top: "0",
+  left: "0"
 
-      })} 
-            ${mobile({  fontSize: "40px",top:"60px" })}
+})} 
+            ${mobile({ fontSize: "40px", top: "35px" })}
 
  
 `
@@ -154,7 +174,7 @@ const PriceInfo = styled.div`
     position: absolute;
     top:50px; 
     left:10px;
-    ${mobile({  fontSize: "15px", top:"100px"})}
+    ${mobile({ fontSize: "15px", top: "80px" })}
 
 
 
@@ -167,11 +187,11 @@ const ProductTitle = styled.div`
     font-size: 40px;
     font-weight: 500;
     font-family: 'Assistant';
-    ${desktop({ 
-     width: "57%"
+    ${desktop({
+  width: "57%"
 
-      })} 
-      ${mobile({  fontSize: "29px", width: "100%" })}
+})} 
+      ${mobile({ fontSize: "29px", width: "100%" })}
        
 `
 
@@ -181,7 +201,7 @@ const ProductDesc = styled.div`
     font-size: 20px;
     font-weight: 500;
     font-family: 'Assistant';
-    ${mobile({  fontSize: "15px"})}
+    ${mobile({ fontSize: "15px" })}
       
 `
 
@@ -203,7 +223,9 @@ const InputAmount = styled.input`
     font-size: 22px;
     text-align: center;
     margin: 0px 5px;
-    ${desktop({   width: "25%" })}
+
+
+    ${desktop({ width: "25%" })}
 
 `
 const ButtonBuy = styled.button`
@@ -217,16 +239,21 @@ const ButtonBuy = styled.button`
     cursor: pointer;
     margin-top:18px;
     -webkit-tap-highlight-color: transparent;
-
+    animation-duration:2s;
+   
     &:hover {
-   transform: scale(1.0);
+   transform: scale(1.1);
+ 
  }
 
  &:active {
-   background-color: #a0d3f8;
+   background-color: #ffc107;
+   color: #000000;
    transform: scale(1.3);
+
+
  }
- ${mobile({  marginRight:"5px" })}
+ ${mobile({ marginRight: "5px" })}
 
 `
 
@@ -252,7 +279,7 @@ const ButtonAmount = styled.button`
    background-color: #a0d3f8;
    transform: scale(1.3);
  }
- ${mobile({  marginLeft:"5px" })}
+ ${mobile({ marginLeft: "5px" })}
 `
 
 const PriceShakel = styled.span`
@@ -263,37 +290,90 @@ const PirceExtra = styled.span`
     font-family: 'Assistant';
 `
 
-const Product = ({item}) =>{
 
 
 
 
-    return (
-        <Container>
-            <ProductInfoWrapper>
-            <ProductTitle>{item.title}</ProductTitle>
-            <Price><PriceShakel>₪</PriceShakel>{item.price}<PirceExtra>{item.priceExtra}</PirceExtra></Price>
-            <PriceInfo>{item.priceDesc}</PriceInfo>
-            </ProductInfoWrapper>
-            <MoreInfoWrapper>
-            <ProductDesc>{item.brand}</ProductDesc>
-           
-          
-            </MoreInfoWrapper>
-            <Main>
-            <Circle>
-            <Image src={item.img}/>
-            </Circle>
-            <ButtonBuy>הוסף</ButtonBuy>
-            <ButtonAmount>כמות</ButtonAmount>
-            <IconWrapper >
-            <IconAdd fontSize='large'/>
-            <InputAmount defaultValue="0" type="text"/>
-            <IconRemove fontSize='large'/> 
-            </IconWrapper>
-            </Main>
-        </Container>
-    )
+const Product = ({ item ,index}) => {
+
+
+  const navigate = useNavigate();
+  const isFirstRun = useRef(true);
+  
+  const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+
+  function navProduct(id) {
+    navigate("/product/" + id);
+  }
+  const [openQuantity,SetOpenQuantity] = useState(false);
+  const toggleQuantity = () => {
+    SetOpenQuantity(openQuantity => !openQuantity);
+    setQuantity(1)
+  };
+
+
+
+
+  const loggedUser = useSelector((state) => state.auth);
+  const cartProducts= useSelector((state) => state.cart.products);
+  const loggingOut= useSelector((state) => state.auth.isProccessingLogout);
+
+  const cart= useSelector((state) => state.cart);
+
+  const handleQuantity = (type) => {
+    if (type === "remove") {
+      quantity > 1 && setQuantity(quantity => quantity - 1);
+    } else {
+      setQuantity(quantity => quantity + 1);
+    }
+  };
+
+
+const handleAddClick = () => {
+   dispatch(addToCart({selectedProduct:item,quantity}))
+}
+
+
+useEffect(() => {
+  console.log(loggedUser)
+  console.log(loggingOut)
+ if(loggedUser.username)
+ updateCart(dispatch,cart ,loggedUser,loggingOut)
+}, [cartProducts])
+
+
+
+
+  return (
+
+
+    <Container>
+      <ProductInfoWrapper>
+        <ProductTitle >{item.title}</ProductTitle>
+        <Price><PriceShakel>₪</PriceShakel>{item.price}<PirceExtra>{item.priceExtra}</PirceExtra></Price>
+        <PriceInfo>{item.priceDesc}</PriceInfo>
+      </ProductInfoWrapper>
+      <MoreInfoWrapper>
+        <ProductDesc>{item.brand}</ProductDesc>
+
+
+
+      </MoreInfoWrapper>
+      <Main>
+        <Circle onClick={() => navProduct(item._id)} >
+          <Image src={item.img} />
+        </Circle>
+        <ButtonBuy   data-testid={`CartPutProductTest-${index}`} onClick={handleAddClick} >הוסף</ButtonBuy>
+        <ButtonAmount data-testid={`AmountProductTest-${index}`}  onClick={toggleQuantity} >כמות</ButtonAmount>
+        <IconWrapper  toggle={openQuantity}>
+          <IconAdd  data-testid={`AddIconProductTest-${index}`} onClick={() => handleQuantity("add")} fontSize='large' />
+          <InputAmount value={quantity} />
+          <IconRemove data-testid={`RemoveIconProductTest-${index}`} onClick={() => handleQuantity("remove")} fontSize='large' />
+        </IconWrapper>
+      </Main>
+    </Container>
+  )
 }
 
 export default Product
