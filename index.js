@@ -22,7 +22,7 @@ mongoose
     console.log(err);
   });
 
-
+console.log(process.env.MONGO_URL)
 
 app.use(cors());
 app.use(express.json());
