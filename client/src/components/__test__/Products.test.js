@@ -3,9 +3,6 @@ import { BrowserRouter } from "react-router-dom";
 import Products from "../Products";
 import "@testing-library/jest-dom/extend-expect";
 
-
-
-
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
@@ -35,7 +32,7 @@ beforeEach(() => {
       total: 0,
     },
     products: {
-        products: [
+      products: [
         {
           _id: 1,
           title: "cake",
@@ -59,7 +56,6 @@ beforeEach(() => {
       ],
     },
   });
-
 });
 
 afterEach(() => {
@@ -83,6 +79,4 @@ describe("Products", () => {
     const productTitleElement = await screen.queryByText(/apple/i);
     expect(productTitleElement).toBeInTheDocument();
   });
-
-
 });

@@ -1,16 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Advertisement from "../components/Advertisement";
-import Categories from "../components/Categories";
 import Navbar from "../components/Navbar";
-import Slider from "../components/Slider";
-import Products from "../components/Products";
-import styled from "styled-components";
 import Footer from "../components/Footer";
-import { getCart } from "../redux/actions/cartActions";
-import { useDispatch, useSelector } from "react-redux";
-import Product from "../components/Product";
-import { lastProducts, mostProducts } from "../redux/actions/productsActions";
-import { stores } from "../data";
+
+//SC
+import styled from "styled-components";
+
+import { publicRequest } from "../requestMethods";
 
 const Container = styled.div``;
 
@@ -55,6 +51,7 @@ const Store = styled.div`
 
 const StoreImg = styled.div`
   width: 200px;
+  margin-right: 30px;
 `;
 
 const StoreInfo = styled.div`
@@ -71,9 +68,16 @@ const StoreImage = styled.img`
 `;
 
 const Stores = () => {
+  const [stores, SetStores] = useState();
 
+  useEffect(() => {
+    const stores = async () => {
+      const res = await publicRequest.get("/info/store");
+      SetStores(res.data);
+    };
 
-console.log(stores)
+    stores();
+  }, []);
 
   return (
     <Container>
@@ -83,7 +87,7 @@ console.log(stores)
       <Title> הכירו את החנויות והרשתות שפועלים איתנו</Title>
 
       <StoresWrapper>
-        {stores.map((item) => (
+        {stores?.map((item) => (
           <Store key={item.id}>
             <StoreInfo>
               <StoreTitle>{item.title}</StoreTitle>

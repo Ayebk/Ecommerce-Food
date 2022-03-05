@@ -1,20 +1,17 @@
 import React, { forwardRef, useEffect, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+
 import {
   Badge,
   Popover,
   StyledEngineProvider,
   Typography,
 } from "@mui/material";
-import { red } from "@mui/material/colors";
 import { mobile, laptop, tablet } from "../responsive";
-import { Scale } from "@mui/icons-material";
-import SearchIcon from "@mui/icons-material/Search";
-import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import { useNavigate } from "react-router-dom";
+
+//REDUX
 import { useDispatch, useSelector } from "react-redux";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import {
   logoutProcess,
   logoutProcessReset,
@@ -23,6 +20,12 @@ import {
   resetMes,
 } from "../redux/actions/authActions";
 import { updateCart } from "../redux/actions/cartActions";
+
+
+//MUI
+import ReadMoreIcon from "@mui/icons-material/ReadMore";
+
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import LocalCafeIcon from "@mui/icons-material/LocalCafe";
 import CoffeeIcon from "@mui/icons-material/Coffee";
 import IcecreamIcon from "@mui/icons-material/Icecream";
@@ -31,11 +34,15 @@ import SpaIcon from "@mui/icons-material/Spa";
 import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
 import DinnerDiningIcon from "@mui/icons-material/DinnerDining";
 import KitchenIcon from "@mui/icons-material/Kitchen";
-
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Stack from "@mui/material/Stack";
-
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+
+
+/**
+ * POPUP
+ */
 
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -45,10 +52,10 @@ const Container = styled.div`
   height: 90px;
   position: sticky;
   top: 0;
-    z-index: 99;
-    width: 100%;
-    background-color: white;
-    border-bottom: solid 2px beige;
+  z-index: 99;
+  width: 100%;
+  background-color: white;
+  border-bottom: solid 2px beige;
 
   ${tablet({ height: "135px" })};
 `;
@@ -56,7 +63,6 @@ const Container = styled.div`
 const Wrapper = styled.div`
   padding: 25px 10px 0px 10px;
   display: flex;
- 
 `;
 
 const Center = styled.div`
@@ -104,7 +110,6 @@ const MenuItem = styled.div`
   min-width: 55px;
   min-width: ${(props) => props.type === "menu3" && "105px"};
   margin-left: ${(props) => props.type === "menu3" && "40px"};
-
 
   &:hover {
     background-color: #ffffff3d;
@@ -341,11 +346,6 @@ const ItemWrapper = styled.div`
   overflow-y: hidden;
 `;
 
-
-
-
-
-
 const Navbar = () => {
   const loggedUser = useSelector((state) => state.auth);
   const cartQuantity = useSelector((state) => state.cart.quantity);
@@ -353,9 +353,16 @@ const Navbar = () => {
   const loggingOut = useSelector((state) => state.auth.isProccessingLogout);
   const failedProcess = useSelector((state) => state.auth.failedProcess);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [openMes, setOpenMes] = useState(false);
+  const [openMesSuc, setOpenMesSuc] = useState(false);
+  const [anchorElResp, setAnchorElResp] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
+  /**
+   * Popup
+   */
   const handleClickMes = () => {
     setOpenMes(true);
   };
@@ -368,9 +375,9 @@ const Navbar = () => {
     setOpenMes(false);
   };
 
-
-
-  const [openMesSuc, setOpenMesSuc] = useState(false);
+  /**
+   * Popup
+   */
 
   const handleClickMesSuc = () => {
     setOpenMesSuc(true);
@@ -384,6 +391,10 @@ const Navbar = () => {
     setOpenMesSuc(false);
   };
 
+  /**
+   * Logout Process
+   */
+
   useEffect(() => {
     if (failedProcess === true) {
       handleClickMes();
@@ -395,10 +406,6 @@ const Navbar = () => {
       handleClickMesSuc();
     }
   }, [dispatch]);
-
-
-
-  const [anchorElResp, setAnchorElResp] = React.useState(null);
 
   const handleClickResp = (event) => {
     setAnchorElResp(event.currentTarget);
@@ -415,7 +422,9 @@ const Navbar = () => {
     dispatch(logoutReset());
   };
 
-  const navigate = useNavigate();
+  /**
+   * Navigation
+   */
 
   function navHome() {
     if (window.location.pathname === "/") {
@@ -462,8 +471,6 @@ const Navbar = () => {
     navigate("/products/" + item);
     window.location.reload();
   }
-
-  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
     dispatch(logoutProcess());
@@ -527,7 +534,11 @@ const Navbar = () => {
         <Center>
           <Logo onClick={navHome}>FoodNow</Logo>
           <MenuItemHome onClick={navHome}>דף בית</MenuItemHome>
-          <MenuItem data-testid="productsNav" type="menu2" onClick={navProducts}>
+          <MenuItem
+            data-testid="productsNav"
+            type="menu2"
+            onClick={navProducts}
+          >
             מוצרים
           </MenuItem>
           <MenuItem type="menu3" onClick={navStores}>

@@ -28,18 +28,18 @@ export const productReducer = (state = initialState, { type, payload }) => {
         selectedProduct: payload,
         isLoading: false,
       };
-      case ActionTypes.LOADING_LAST_PRODUCTS:
-        return {
-          ...state,
-          products: [],
-          isLoading: false,
-        };
-      case ActionTypes.SECCUSS_LAST_PRODUCT:
-        return {
-          ...state,
-          products: payload,
-          isLoading: false,
-        };
+    case ActionTypes.LOADING_LAST_PRODUCTS:
+      return {
+        ...state,
+        products: [],
+        isLoading: false,
+      };
+    case ActionTypes.SECCUSS_LAST_PRODUCT:
+      return {
+        ...state,
+        products: payload,
+        isLoading: false,
+      };
     case ActionTypes.CLEAR_PRODUCT:
       return {
         ...state,

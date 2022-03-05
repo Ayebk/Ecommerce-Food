@@ -1,14 +1,22 @@
-import { Publish } from "@mui/icons-material";
-import axios from "axios";
 import { forwardRef, useEffect, useRef, useState } from "react";
+import axios from "axios";
+
+//REDUX
+import { Publish } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../redux/actions/productsActions";
+
+//MUI
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
 import "./newProduct.css";
-import Stack from '@mui/material/Stack';
-import Snackbar from '@mui/material/Snackbar';
 
 
-import MuiAlert from '@mui/material/Alert';
+/**
+ * Popup
+ */
 
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -22,27 +30,30 @@ export default function NewProduct() {
   const [categories, setCategories] = useState([]);
   const [img, setImg] = useState();
   const [imgUrl, setImgUrl] = useState();
+  const [open, setOpen] = useState(false);
+  const [openError, setOpenError] = useState(false);
+
   const isFirstRun = useRef(true);
 
-
-
-  const error = useSelector((state) =>state.products.error)
-  const seccuss = useSelector((state) =>state.products.seccuss)
-
+  const error = useSelector((state) => state.products.error);
+  const seccuss = useSelector((state) => state.products.seccuss);
 
   useEffect(() => {
-    if(error){
-      handleClickError()
+    if (error) {
+      handleClickError();
       handleClose();
     }
-    if(seccuss){
-      handleClick()
+    if (seccuss) {
+      handleClick();
       handleCloseError();
     }
-  }, [error,seccuss])
+  }, [error, seccuss]);
 
 
-
+    /**
+   * Create product with upload image to couldinary
+   * 
+   */
 
 
   const postDetails = async () => {
@@ -50,89 +61,55 @@ export default function NewProduct() {
     data.append("file", img);
     data.append("upload_preset", "e-commerce");
     data.append("cloud_name", "dzy0uevma");
-    try{
-      if(img){
-          axios.post("https://api.cloudinary.com/v1_1/dzy0uevma/image/upload",data ).then(
-
-              result => setImgUrl(result.data.secure_url) )
-      }else{
-
+    try {
+      if (img) {
+        axios
+          .post("https://api.cloudinary.com/v1_1/dzy0uevma/image/upload", data)
+          .then((result) => setImgUrl(result.data.secure_url));
+      } else {
         const res = addProduct(dispatch, inputs, imgUrl);
-        console.log(res)
-        // if(res){
-        //   console.log("yyyy")
-        //   handleClick()
-        //   handleCloseError();
-        // }
-        // else{
-        //   handleClickError();
-        //   handleClose();
-        // }
-       
+        console.log(res);
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-
   useEffect(() => {
-    console.log(isFirstRun.current)
+    console.log(isFirstRun.current);
     return () => {
-      console.log("xcdxdxdxdxdxdxd")
-      isFirstRun.current = true
-    }
-   
-  }, );
-
-
-  const [open, setOpen] = useState(false);
+      isFirstRun.current = true;
+    };
+  });
 
   const handleClick = () => {
     setOpen(true);
   };
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
     setOpen(false);
   };
 
-
-  const [openError, setOpenError] = useState(false);
-
   const handleClickError = () => {
     setOpenError(true);
   };
 
   const handleCloseError = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
     setOpenError(false);
   };
 
-
-
-
-
-
-
-
-
-
-
-
   useEffect(() => {
-
-    if(!isFirstRun.current){
-      console.log("bbbbbbbbb")
+    if (!isFirstRun.current) {
       addProduct(dispatch, inputs, imgUrl);
-
-  }
+    }
   }, [imgUrl]);
 
   const handleChange = (e) => {
@@ -151,37 +128,40 @@ export default function NewProduct() {
     await postDetails();
   };
 
-
-  useEffect (() => {
+  useEffect(() => {
     if (isFirstRun.current) {
       isFirstRun.current = false;
     }
-    console.log(isFirstRun)
-  },[]);
-
-  console.log(inputs);
-  console.log(categories);
+  }, []);
 
   return (
     <div className="newProduct">
-
-
-<Stack spacing={2} sx={{ width: '100%' }}> 
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-         successfully updated!
-        </Alert>
-      </Snackbar>
-    </Stack>
-    <Stack spacing={2} sx={{ width: '100%' }}> 
-      <Snackbar open={openError} autoHideDuration={6000} onClose={handleCloseError}>
-        <Alert onClose={handleCloseError} severity="error" sx={{ width: '100%' }}>
-          an error occurred!
-        </Alert>
-      </Snackbar>
-    </Stack>
-
-
+      <Stack spacing={2} sx={{ width: "100%" }}>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert
+            onClose={handleClose}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            successfully updated!
+          </Alert>
+        </Snackbar>
+      </Stack>
+      <Stack spacing={2} sx={{ width: "100%" }}>
+        <Snackbar
+          open={openError}
+          autoHideDuration={6000}
+          onClose={handleCloseError}
+        >
+          <Alert
+            onClose={handleCloseError}
+            severity="error"
+            sx={{ width: "100%" }}
+          >
+            an error occurred!
+          </Alert>
+        </Snackbar>
+      </Stack>
 
       <h1 className="newProductTitle">New Product</h1>
       <form className="newProductForm" onSubmit={handleUpdate}>
@@ -256,30 +236,30 @@ export default function NewProduct() {
           </select>
         </div>
         <div className="userUpdateWrapper">
-        <div className="userUpdateUpload">
-          <img
-            src={img ? URL.createObjectURL(img) : null}
-            alt=""
-            className="userUpdateImg"
-          />
-          <div className="userInputFileIcon"></div>
-          <div className="userInputFileIcon">
-            <label style={{ cursor: "pointer" }} htmlFor="file">
-              <Publish />
-            </label>
-            <input
-              type="file"
-              id="file"
-              style={{ display: "none" }}
-              onChange={(e) => setImg(e.target.files[0])}
+          <div className="userUpdateUpload">
+            <img
+              src={img ? URL.createObjectURL(img) : null}
+              alt=""
+              className="userUpdateImg"
             />
+            <div className="userInputFileIcon"></div>
+            <div className="userInputFileIcon">
+              <label style={{ cursor: "pointer" }} htmlFor="file">
+                <Publish />
+              </label>
+              <input
+                type="file"
+                id="file"
+                style={{ display: "none" }}
+                onChange={(e) => setImg(e.target.files[0])}
+              />
+            </div>
           </div>
-        </div>
-        <div className="newProductContainerButton">
-          <button type="submit" className="newProductButtonSubmit">
-            Create
-          </button>
-        </div>
+          <div className="newProductContainerButton">
+            <button type="submit" className="newProductButtonSubmit">
+              Create
+            </button>
+          </div>
         </div>
       </form>
     </div>

@@ -1,10 +1,13 @@
-import "./chart.css"
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
+import "./chart.css"
 
 export default function Chart({ title, data, dataKey, grid }) {
 
-
+/**
+ * Chart for users analytics
+ * 
+ */
 
     return (
         <div className="chart" >

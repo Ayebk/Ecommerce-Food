@@ -4,7 +4,6 @@ const routes = {
   //CREATE
 
   createOrder: async (req, res) => {
-    // verfityToken <---- any users and make a cart...
     const newOrder = new Order(req.body);
 
     try {
@@ -99,11 +98,9 @@ const routes = {
         {
           $group: {
             _id: "$month",
-            total: {$sum:"$Sales"},
+            total: { $sum: "$Sales" },
           },
         },
-
-     
       ]);
       console.log(" THIS IS THE QUERY =====>    " + JSON.stringify(income));
       res.status(200).json(income);
@@ -189,53 +186,44 @@ const routes = {
     }
   },
 
+  // GET MOST  SALES OF PRODUCT
 
-
-
- // GET MOST  SALES OF PRODUCT
-
- getMostSales: async (req, res) => {
-  const productId = req.query.pid;
-  const date = new Date();
-  const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
-  const previousMonth = new Date(
-    new Date().setMonth(lastMonth.getMonth() - 1)
-  );
-  try {
-    const income = await Order.aggregate([
- 
-      {
-        $unwind: {
-          path: "$products",
+  getMostSales: async (req, res) => {
+    const productId = req.query.pid;
+    const date = new Date();
+    const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
+    const previousMonth = new Date(
+      new Date().setMonth(lastMonth.getMonth() - 1)
+    );
+    try {
+      const income = await Order.aggregate([
+        {
+          $unwind: {
+            path: "$products",
+          },
         },
-      },
-     
-      {
-        $project: {
-          id: "$products.productId",
-          Sales: "$products.quantity",
+
+        {
+          $project: {
+            id: "$products.productId",
+            Sales: "$products.quantity",
+          },
         },
-      },
 
-      {
-        $group: {
-          _id: "$id",
-          total: {$sum:"$Sales"},
+        {
+          $group: {
+            _id: "$id",
+            total: { $sum: "$Sales" },
+          },
         },
-      },
-
-   
-    ]);
-    console.log(" THIS IS THE QUERY most most =====>    " + JSON.stringify(income));
-    res.status(200).json(income);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-},
-
-
-
-
-
+      ]);
+      console.log(
+        " THIS IS THE QUERY most most =====>    " + JSON.stringify(income)
+      );
+      res.status(200).json(income);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
 };
 module.exports = routes;

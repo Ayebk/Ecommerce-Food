@@ -13,9 +13,6 @@
 }
 
 
-
-
-
 .prodcutName{
     font-size: 25px;
     margin: 10px 0px;
@@ -70,19 +67,19 @@
     justify-content: space-between;
 }
 .productSales{
-flex: 2;
-margin-top: 10px;
-padding: 20px;
-height: fit-content;
-min-width: 320px;
-justify-content: center;
+    flex: 2;
+    margin-top: 10px;
+    padding: 20px;
+    height: fit-content;
+    min-width: 320px;
+    justify-content: center;
 }
 
 .productInfo{
     flex: 2;
     padding: 20px;
     border: solid rgba(57, 120, 255, 0.568) 1px;
-border-radius: 10px;
+    border-radius: 10px;
     margin: 0px 20px 20px 20px ;
     height: fit-content;
 }

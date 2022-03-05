@@ -3,14 +3,16 @@ import Advertisement from "../components/Advertisement";
 import Categories from "../components/Categories";
 import Navbar from "../components/Navbar";
 import Slider from "../components/Slider";
-import Products from "../components/Products";
 import styled from "styled-components";
 import Footer from "../components/Footer";
+
+//REDUX
 import { getCart } from "../redux/actions/cartActions";
 import { useDispatch, useSelector } from "react-redux";
-import Product from "../components/Product";
 import { lastProducts, mostProducts } from "../redux/actions/productsActions";
-import { mobile, laptop, tablet, desktop } from '../responsive'
+
+import Product from "../components/Product";
+import { mobile, laptop, tablet, desktop } from "../responsive";
 
 const Container = styled.div`
   position: relative;
@@ -31,7 +33,6 @@ const ProductsWrapper = styled.div`
   width: 80%;
   margin-right: auto;
   margin-left: auto;
-  margin-bottom: 50px;
   justify-content: center;
 `;
 
@@ -43,15 +44,12 @@ const AdminTitle = styled.h2`
   color: white;
   ${mobile({
     marginTop: "39px",
-     fontSize: "15px"
-     
-})}
+    fontSize: "15px",
+  })}
 `;
 
-
-
 const AdminAd = styled.div`
-cursor: pointer;
+  cursor: pointer;
   position: absolute;
   height: 240px;
   width: 240px;
@@ -105,25 +103,13 @@ cursor: pointer;
     height: "180px",
     width: "180px",
     marginTop: "350px",
-})} 
+  })}
 `;
-
-
 
 const Home = () => {
   const loggedUser = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
-
-  // useEffect(() => {
-
-  //     if(loggedUser.username){
-  //       getCart(dispatch, loggedUser.id)
-
-  //     }
-
-  //   }
-  //     , [loggedUser.username])
 
   useEffect(() => {
     if (localStorage.getItem("username") !== null)
@@ -139,7 +125,12 @@ const Home = () => {
   return (
     <Container>
       <AdminAd>
-        <AdminTitle>לחצו כאן<br/> לראות ולחוות את <br/><br/> Admin Dashboard <br/>Demo</AdminTitle>
+        <AdminTitle>
+          לחצו כאן
+          <br /> לראות ולחוות את <br />
+          <br /> Admin Dashboard <br />
+          Demo
+        </AdminTitle>
       </AdminAd>
       <Navbar />
       <Advertisement />

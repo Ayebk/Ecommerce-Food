@@ -8,10 +8,6 @@
 }
 
 
-.sidebarMenu{
-    
-}
-
 .sidebarListTitleWrapper{
 
     display: flex;
@@ -36,8 +32,6 @@
     color: rgb(0, 0, 0);
     font-weight: 300;
     font-family: 'Source Sans Pro';
-    
-   
 }
 
 .sidebarList{

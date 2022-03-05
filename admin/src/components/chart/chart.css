@@ -1,7 +1,5 @@
 .chart{
     padding-right: 25px;
-    
-
 }
 
 .chartWrapper{
@@ -10,8 +8,7 @@
 
 .chartTitle{
     font-size: 24px;
-    margin-bottom: 20px;
-    
+    margin-bottom: 20px; 
 }
 
 .chartBlocked{

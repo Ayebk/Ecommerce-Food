@@ -22,9 +22,6 @@
         
 }
 
-.loginWrapper{
-  
-}
 
 .loginTitle{
     text-align-last: center;
@@ -60,10 +57,7 @@ align-items: center;
     padding: 3px 30px;
     margin-bottom: 10px;
     box-shadow: 0 0 2px #0600b7;
- 
-
-  /* ${tablet({ width: " 250px", fontSize: "25px" })} */
-}
+ }
 
 .buttonLogin:hover {
     transform: scale(1.2);
@@ -107,10 +101,7 @@ font-size: 22px;
     cursor: pointer;
     padding: 3px 30px;
     margin: 50px auto;
- 
-
-  /* ${tablet({ width: " 250px", fontSize: "25px" })} */
-}
+ }
 
 .buttonDemo:hover {
     transform: scale(1.2);

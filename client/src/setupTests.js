@@ -1,2 +1,1 @@
-
-const localstorageMock = {}
+const localstorageMock = {};

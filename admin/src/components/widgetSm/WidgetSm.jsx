@@ -1,10 +1,18 @@
-import "./widgetSm.css";
-import { Visibility } from "@mui/icons-material";
+
 import { useEffect, useState } from "react";
 import { userRequest } from "../../requestMethods";
-import { useResolvedPath } from "react-router-dom";
+
+//MUI
+import { Visibility } from "@mui/icons-material";
+
+import "./widgetSm.css";
+
 export default function WidgetSm() {
   const [users, setUsers] = useState();
+
+  /**
+   * User List
+   */
 
   useEffect(() => {
     const getUsers = async () => {
@@ -18,22 +26,14 @@ export default function WidgetSm() {
     getUsers();
   }, []);
 
-
-
-
   return (
     <div className="widgetSm">
       <span className="widgetSmTitle"> New Members</span>
-      <ul className="widgetSmList" >
-       
-
-
-         
-        <li className="widgetSmListItem" >
+      <ul className="widgetSmList">
+        <li className="widgetSmListItem">
           <img
             className="widgetSmImg"
             src={
-             
               "https://res.cloudinary.com/dzy0uevma/image/upload/v1645617415/e-commerce/lq5l1h0gr4vnbid8nc7a.webp"
             }
             alt=""
@@ -47,11 +47,10 @@ export default function WidgetSm() {
             Display
           </button>
         </li>
-        <li className="widgetSmListItem" >
+        <li className="widgetSmListItem">
           <img
             className="widgetSmImg"
             src={
-             
               "https://res.cloudinary.com/dzy0uevma/image/upload/v1645617415/e-commerce/lq5l1h0gr4vnbid8nc7a.webp"
             }
             alt=""
@@ -65,11 +64,10 @@ export default function WidgetSm() {
             Display
           </button>
         </li>
-        <li className="widgetSmListItem" >
+        <li className="widgetSmListItem">
           <img
             className="widgetSmImg"
             src={
-             
               "https://res.cloudinary.com/dzy0uevma/image/upload/v1645617415/e-commerce/lq5l1h0gr4vnbid8nc7a.webp"
             }
             alt=""
@@ -83,11 +81,10 @@ export default function WidgetSm() {
             Display
           </button>
         </li>
-        <li className="widgetSmListItem" >
+        <li className="widgetSmListItem">
           <img
             className="widgetSmImg"
             src={
-             
               "https://res.cloudinary.com/dzy0uevma/image/upload/v1645617415/e-commerce/lq5l1h0gr4vnbid8nc7a.webp"
             }
             alt=""
@@ -101,11 +98,10 @@ export default function WidgetSm() {
             Display
           </button>
         </li>
-        <li className="widgetSmListItem" >
+        <li className="widgetSmListItem">
           <img
             className="widgetSmImg"
             src={
-             
               "https://res.cloudinary.com/dzy0uevma/image/upload/v1645617415/e-commerce/lq5l1h0gr4vnbid8nc7a.webp"
             }
             alt=""
@@ -119,7 +115,6 @@ export default function WidgetSm() {
             Display
           </button>
         </li>
-        
       </ul>
     </div>
   );

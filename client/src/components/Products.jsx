@@ -1,71 +1,81 @@
-import React, { useEffect, useState } from 'react'
-import Product from './Product'
-import styled from 'styled-components'
-import { popularProducts } from '../data'
-import { mobile, laptop, tablet, desktop } from '../responsive'
-import axios from 'axios'
-import { axiosInstance } from '../confing'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect, useState } from "react";
+import Product from "./Product";
+
+//SC
+import styled from "styled-components";
+import { mobile, laptop, tablet, desktop } from "../responsive";
+import axios from "axios";
+import { axiosInstance } from "../confing";
+
+//REDUX
+import { useDispatch, useSelector } from "react-redux";
 
 const Container = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    width: 80%;
-    margin-right: auto;
-    margin-left: auto;
-    margin-bottom: 50px;
-    justify-content: center;
-    ${desktop({ width: "100%" })}
-    
-`
-
-
-
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 50px;
+  justify-content: center;
+  ${desktop({ width: "100%" })}
+`;
 
 const Products = ({ category, filters, sort }) => {
-
-    console.log(category)
-    console.log(filters)
-    const products = useSelector((state) => state.products.products);
-    const [filteredProducts, setFilteredProducts] = useState([]);
+  const products = useSelector((state) => state.products.products);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   
-   
-    useEffect(() => {
+  /**
+   * Filtering Products to map them
+   */
 
-        let unmounted = false;
-        if (category && (filters.brand == null || filters.brand == "all" ) && !unmounted) {
-            
-            const filtered = products.filter((item) => item.categories == filters.category )
-            setFilteredProducts(filtered)
-   
+  useEffect(() => {
+    let unmounted = false;
+    if (
+      category &&
+      (filters.brand == null || filters.brand == "all") &&
+      !unmounted
+    ) {
+      const filtered = products.filter(
+        (item) => item.categories == filters.category
+      );
+      setFilteredProducts(filtered);
+    } else if (category && !unmounted) {
+      const filtered = products.filter(
+        (item) =>
+          item.categories == filters.category && item.brand == filters.brand
+      );
+      setFilteredProducts(filtered);
+    }
+    return () => {
+      unmounted = true;
+    };
+  }, [category, filters, products]);
 
-        }
-        
-        else if (category && !unmounted) {
-            const filtered = products.filter((item) => item.categories == filters.category  && item.brand == filters.brand)
-            setFilteredProducts(filtered)
-   
 
-        }
-        return () => { unmounted = true };
-    }, [category, filters, products])
 
-    console.log(sort)
 
-    return (
-        <Container>
-            {filteredProducts.sort((a,b)=>{
-                if(sort == 'asc'){
-                   return a.price-b.price
-                }else{
-                    return  b.price-a.price
-                }
-            }).map((item,index) => (   // index only for cypress-test !
-                <Product item={item} key={item._id} index={index} />
-            ))}
-        </Container>
-    )
-}
+  return (
+    <Container>
+      {filteredProducts
+        .sort((a, b) => {
+          if (sort == "asc") {
+            return a.price - b.price;
+          } else {
+            return b.price - a.price;
+          }
+        })
+        .map(
+          (
+            item,
+            index // index only for cypress-test !
+          ) => (
+            <Product item={item} key={item._id} index={index} />
+          )
+        )}
+    </Container>
+  );
+};
 
-export default Products
+export default Products;

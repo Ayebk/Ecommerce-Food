@@ -1,21 +1,26 @@
-import { Link, useLocation } from "react-router-dom";
-import "./product.css";
-import Chart from "../../components/chart/Chart";
-import { productData } from "../../dummyData";
-import { useDispatch, useSelector } from "react-redux";
-import { forwardRef, Fragment, useEffect, useRef, useState } from "react";
-import { userRequest } from "../../requestMethods";
-import { Publish } from "@mui/icons-material";
-import { updateProduct } from "../../redux/actions/productsActions";
-import Button from "@mui/material/Button";
 
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
+import { forwardRef, Fragment, useEffect, useRef, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import Chart from "../../components/chart/Chart";
+
 import axios from "axios";
+
+//REDUX
+import { useDispatch, useSelector } from "react-redux";
+import { userRequest } from "../../requestMethods";
+import { updateProduct } from "../../redux/actions/productsActions";
+
+//MUI
 import Snackbar from "@mui/material/Snackbar";
 import Stack from "@mui/material/Stack";
-
 import MuiAlert from "@mui/material/Alert";
+import { Publish } from "@mui/icons-material";
+
+import "./product.css";
+
+/**
+ * Popup
+ */
 
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -30,6 +35,9 @@ export default function Product() {
   const [categories, setCategories] = useState([]);
   const [img, setImg] = useState();
   const [imgUrl, setImgUrl] = useState();
+  const [openError, setOpenError] = useState(false);
+  const [open, setOpen] = useState(false);
+
   const isFirstRun = useRef(true);
 
   const product = useSelector((state) =>
@@ -51,14 +59,11 @@ export default function Product() {
   }, [error, seccuss]);
 
   useEffect(() => {
-    console.log(isFirstRun.current);
     return () => {
       console.log("xcdxdxdxdxdxdxd");
       isFirstRun.current = true;
     };
   });
-
-  const [open, setOpen] = useState(false);
 
   const handleClick = () => {
     setOpen(true);
@@ -72,8 +77,6 @@ export default function Product() {
     setOpen(false);
   };
 
-  const [openError, setOpenError] = useState(false);
-
   const handleClickError = () => {
     setOpenError(true);
   };
@@ -85,6 +88,11 @@ export default function Product() {
 
     setOpenError(false);
   };
+
+  /**
+   * Update product with upload image to couldinary
+   *
+   */
 
   const postDetails = async () => {
     const data = new FormData();
@@ -213,7 +221,6 @@ export default function Product() {
             <span className="productInfoKey">Id:</span>
             <span className="productInfoValue">{product?._id}</span>
           </div>
-        
 
           <div className="productInfoItemDesc">
             <span className="productInfoKey">Description:</span>

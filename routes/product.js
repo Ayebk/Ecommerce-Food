@@ -1,34 +1,37 @@
-
-const Product  = require("../models/Product");
+const Product = require("../models/Product");
 const router = require("express").Router();
-const {verifyTokenAndAuthorization,verifyTokenAndAdmin} = require("./verfiyToken")
+const {
+  verifyTokenAndAuthorization,
+  verifyTokenAndAdmin,
+} = require("./verfiyToken");
 const CryptoJS = require("crypto-js");
 
-
-const {createProduct, updatedProduct, deleteProduct, getProduct, getAllProducts,searchProduct} = require("../controllers/product")
+const {
+  createProduct,
+  updatedProduct,
+  deleteProduct,
+  getProduct,
+  getAllProducts,
+  searchProduct,
+} = require("../controllers/product");
 
 //CREATE
 
-router.post("/",verifyTokenAndAdmin,createProduct)
+router.post("/", verifyTokenAndAdmin, createProduct);
 
-
-//UPDATE 
-router.put("/:id",verifyTokenAndAdmin,updatedProduct);
+//UPDATE
+router.put("/:id", verifyTokenAndAdmin, updatedProduct);
 
 //DELETE
-router.delete("/:id",verifyTokenAndAdmin,deleteProduct)
+router.delete("/:id", verifyTokenAndAdmin, deleteProduct);
 
 //GET Product
-router.get("/find/:id", getProduct)
+router.get("/find/:id", getProduct);
 
 //SEARCH Products
-router.get("/search/:text", searchProduct)
-
+router.get("/search/:text", searchProduct);
 
 //GET ALL Products
-router.get("/", getAllProducts)
-
-
-
+router.get("/", getAllProducts);
 
 module.exports = router;

@@ -7,24 +7,25 @@ const mockStore = configureMockStore([thunk, promiseMiddleware()]);
 describe("User Actions", () => {
   let store;
 
+ /**
+   * This is a mock Store - dont get excited
+   */
+
   beforeEach(() => {
     store = mockStore({
-        auth: {
-            username: "jojo",
-            _id: "6343eaf79",
-            userId: "444dcd33",
-            accessToken: "eyJhbGcfdsnR5cgdfgdfsg",
-            id: "6g4gvb",
-          },
-          cart: {
-            isLoading: true,
-            products: [],
-            quantity: 0,
-            total: 0,
-          },
+      auth: {
+        username: "jojo",
+        _id: "123123123123123",
+        userId: "123123",
+        accessToken: "123123123",
+        id: "123",
+      },
+      cart: {
+        isLoading: true,
+        products: [],
+        quantity: 0,
+        total: 0,
+      },
     });
   });
-
-
-
-})
+});
