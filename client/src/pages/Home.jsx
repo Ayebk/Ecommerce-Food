@@ -136,7 +136,7 @@ const Home = () => {
       <Categories />
       <Title> החדשים</Title>
       <ProductsWrapper>
-        {products.map((item) => (
+        {products?.map((item) => (
           <Product item={item} key={item.id} />
         ))}
       </ProductsWrapper>
