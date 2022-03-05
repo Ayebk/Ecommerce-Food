@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Advertisement from "../components/Advertisement";
 import Categories from "../components/Categories";
 import Navbar from "../components/Navbar";
@@ -119,6 +119,7 @@ const Home = () => {
   useEffect(() => {
     lastProducts(dispatch);
   }, [dispatch]);
+
 
   return (
     <Container>

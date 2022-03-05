@@ -175,7 +175,7 @@ const Button = styled.button`
 
 const Slider = (props) => {
   const [sliderIndex, setsliderIndex] = useState(0);
-  const [sliders, SetSliders] = useState();
+  const [sliders, SetSliders] = useState([]);
   const navigate = useNavigate();
 
 
@@ -211,6 +211,7 @@ const Slider = (props) => {
   const nav = (link) => {
     navigate(link);
   };
+  console.log(sliders)
 
   return (
     <Container>

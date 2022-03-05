@@ -74,7 +74,7 @@ const Category = styled.div`
    */
 
 const Categories = () => {
-  const [categories, SetCategories] = useState();
+  const [categories, SetCategories] = useState([]);
 
   useEffect(() => {
     const categories = async () => {
