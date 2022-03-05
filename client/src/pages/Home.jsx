@@ -121,10 +121,15 @@ const Home = () => {
   }, [dispatch]);
 
 
+  const adminDemoNav = () => {
+    window.location.assign("https://admin-dashboard-demo123.herokuapp.com/")
+  };
+
+
   return (
     <Container>
       <AdminAd>
-        <AdminTitle>
+        <AdminTitle  onClick={() => adminDemoNav()}>
           לחצו כאן
           <br /> לראות ולחוות את <br />
           <br /> Admin Dashboard <br />
