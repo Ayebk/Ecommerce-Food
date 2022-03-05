@@ -483,12 +483,10 @@ const Cart = () => {
   };
 
   const handleAddQuantity = (item) => {
-    console.log(item);
     dispatching(addOneToCart({ selectedProduct: item, quantity }));
   };
 
   const handleRemoveQuantity = (item) => {
-    console.log(item);
     if (item.quantity > 1) {
       dispatching(removeOneFromCart({ selectedProduct: item, quantity }));
     }
@@ -524,7 +522,6 @@ const Cart = () => {
 
   const [openPay, setOpenPay] = useState(false);
 
-  console.log(total);
   const amount = total.toFixed(2);
   const currency = "ILS";
   const [openModal, setOpenModal] = useState(false);
@@ -552,7 +549,6 @@ const Cart = () => {
     userRequest
       .post("/orders", data)
       .then((res) => {
-        console.log(res);
         setOpenModal(true);
       })
 
@@ -609,17 +605,13 @@ const Cart = () => {
             return actions.order.capture().then(function (details) {
               // Your code here after capture the order
               const shipping = details.purchase_units[0].shipping;
-              console.log(cart);
-              console.log(details);
-              console.log(shipping.address.address_line_1);
-              console.log(details.purchase_units[0].amount.value);
+            
               const products = cart.products.map((item) => {
                 return {
                   productId: item.selectedProduct._id,
                   quantity: item.quantity,
                 };
               });
-              console.log(products);
 
               creatingOrder({
                 userId: loggedUser.id,

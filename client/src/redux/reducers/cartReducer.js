@@ -19,29 +19,22 @@ export const cartReducer = (
         isLoading: true,
       };
     case ActionTypes.SYNC_DB_CART:
-      console.log(payload);
-      console.log(payload);
+ 
       const sumQuantity1 = (payload) => {
         let sum = 0;
         payload.map((item) => {
-          console.log(item.quantity);
           sum += item.quantity;
-          console.log(sum);
         });
-        console.log(sum);
         return sum;
       };
       const sumCost1 = (payload) => {
         let sum = 0;
         payload.map((item) => {
-          console.log(item.quantity);
           sum += item.quantity * item.selectedProduct.price;
-          console.log(sum);
         });
         return sum;
       };
 
-      console.log(sumCost1(payload));
 
       return {
         ...state,
@@ -55,25 +48,16 @@ export const cartReducer = (
       const sumQuantity = (payload) => {
         let sum = 0;
         payload.map((item) => {
-          console.log(item.quantity);
           sum += item.quantity;
-          console.log(sum);
         });
-        console.log(sum);
         return sum;
       };
 
 
     case ActionTypes.ADD_TO_CART:
-      console.log(payload.price);
-      console.log(payload.quantity);
-      console.log(payload._id);
-      console.log(state);
-      console.log(state.products);
-      console.log(payload);
+ 
 
       let itemFound;
-      console.log(state.products);
       if (state.products) {
         state.products.map((item) => {
           if (item.selectedProduct._id === payload.selectedProduct._id) {
@@ -81,9 +65,7 @@ export const cartReducer = (
           }
         });
       }
-      console.log(itemFound);
 
-      console.log(state.products);
       return {
         ...state,
         quantity: state.quantity + payload.quantity,
@@ -103,7 +85,6 @@ export const cartReducer = (
 
     case ActionTypes.ADD_ONE_TO_CART:
       let itemFoundAddOne;
-      console.log(state.products);
       if (state.products) {
         state.products.map((item) => {
           if (
@@ -114,9 +95,7 @@ export const cartReducer = (
           }
         });
       }
-      console.log(itemFoundAddOne);
-
-      console.log(state.products);
+    
       return {
         ...state,
         quantity: state.quantity + 1,
@@ -137,8 +116,7 @@ export const cartReducer = (
 
     case ActionTypes.REMOVE_FROM_CART:
       let itemFoundRemove;
-      console.log(state.products);
-      console.log();
+     
       if (state.products) {
         state.products.map((item) => {
           if (
@@ -149,16 +127,7 @@ export const cartReducer = (
           }
         });
       }
-      console.log(itemFoundRemove);
 
-      console.log(state.products);
-      console.log(
-        state.products.filter(
-          (item) =>
-            item.selectedProduct._id !==
-            payload.selectedProduct.selectedProduct._id
-        )
-      );
       return {
         ...state,
         quantity: state.quantity - payload.selectedProduct.quantity,
@@ -180,16 +149,9 @@ export const cartReducer = (
       };
 
     case ActionTypes.REMOVE_ONE_FROM_CART:
-      console.log(payload.selectedProduct.price);
-      console.log(payload.selectedProduct.quantity);
-      console.log(payload.selectedProduct.selectedProduct._id);
-      console.log(payload._id);
-      console.log(state);
-      console.log(state.products);
-      console.log(payload);
+ 
 
       let itemFoundRemoveOne;
-      console.log(state.products);
       if (state.products) {
         state.products.map((item) => {
           if (
@@ -200,9 +162,7 @@ export const cartReducer = (
           }
         });
       }
-      console.log(itemFoundRemoveOne);
-
-      console.log(state.products);
+    
       return {
         ...state,
         quantity: state.quantity - 1,

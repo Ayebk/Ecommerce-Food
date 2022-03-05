@@ -102,7 +102,6 @@ const routes = {
           },
         },
       ]);
-      console.log(" THIS IS THE QUERY =====>    " + JSON.stringify(income));
       res.status(200).json(income);
     } catch (err) {
       res.status(500).json(err);
@@ -159,7 +158,6 @@ const routes = {
     const previousMonth = new Date(
       new Date().setMonth(lastMonth.getMonth() - 1)
     );
-    console.log("9999999999999999999   ---   " + productId);
     try {
       const income = await Order.aggregate([
         {
@@ -217,9 +215,7 @@ const routes = {
           },
         },
       ]);
-      console.log(
-        " THIS IS THE QUERY most most =====>    " + JSON.stringify(income)
-      );
+
       res.status(200).json(income);
     } catch (err) {
       res.status(500).json(err);

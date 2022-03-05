@@ -11,7 +11,6 @@ export const getProducts = async (dispatch, category) => {
         ? `/products?category=${category.category}`
         : `/products/`
     );
-    console.log(res.data);
 
     dispatch({ type: ActionTypes.LOADING_SUCCESS_PRODUCTS, payload: res.data });
   } catch (error) {
@@ -25,7 +24,6 @@ export const getProduct = async (dispatch, id) => {
 
   try {
     const res = await publicRequest.get("/products/find/" + id.id);
-    console.log(res.data);
 
     dispatch({ type: ActionTypes.GET_PRODUCT, payload: res.data });
   } catch (error) {
@@ -39,7 +37,6 @@ export const searchProducts = async (dispatch, text) => {
 
   try {
     const res = await publicRequest.get(`/products/search/` + text);
-    console.log(res.data);
 
     dispatch({ type: ActionTypes.SUCESS_SEARCH_PRODUCTS, payload: res.data });
   } catch (error) {
@@ -53,7 +50,6 @@ export const lastProducts = async (dispatch) => {
 
   try {
     const res = await publicRequest.get(`/products?new=true`);
-    console.log(res.data);
 
     dispatch({ type: ActionTypes.SECCUSS_LAST_PRODUCT, payload: res.data });
   } catch (error) {

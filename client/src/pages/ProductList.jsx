@@ -78,7 +78,6 @@ const ProductList = () => {
   const [sort, setSort] = useState("asc");
 
   useEffect(() => {
-    console.log("aaaaaa  " + category);
     getProducts(dispatch, { category });
   }, [filters]);
 

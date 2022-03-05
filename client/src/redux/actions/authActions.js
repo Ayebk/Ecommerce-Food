@@ -8,7 +8,6 @@ export const loginUser = async (dispatch, user) => {
   dispatch({ type: ActionTypes.LOGIN_START });
   try {
     const res = await publicRequest.post("/auth/login", user);
-    console.log(res.data);
     localStorage.setItem("token", res.data.accessToken);
     localStorage.setItem("username", res.data.username);
     localStorage.setItem("email", res.data.email);
@@ -28,7 +27,6 @@ export const loginUser = async (dispatch, user) => {
 export const registerUser = async (dispatch, user) => {
   try {
     const res = await publicRequest.post("/auth/register", user);
-    console.log(res);
     dispatch({ type: ActionTypes.REGISTER_SUCCESS, payload: res.data });
 
     return res.data;

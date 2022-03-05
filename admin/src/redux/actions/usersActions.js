@@ -7,7 +7,6 @@ export const getUsers = async (dispatch, category) => {
 
   try {
     const res = await userRequest.get("/users");
-    console.log(res.data);
 
     dispatch({ type: ActionTypes.LOADING_SUCCESS_USERS, payload: res.data });
     dispatch({ type: ActionTypes.CLEAR_MESSAGES });
@@ -19,14 +18,11 @@ export const getUsers = async (dispatch, category) => {
 };
 
 export const updateUser = async (dispatch, id, inputs, img) => {
-  console.log(id);
-  console.log(inputs);
-  console.log(img);
+ 
   dispatch({ type: ActionTypes.UPDATING_USER });
 
   try {
     const res = await userRequest.put(`/users/${id}`, { ...inputs, img });
-    console.log(res.data);
 
     dispatch({ type: ActionTypes.UPDATE_SUCCESS_USER });
     dispatch({ type: ActionTypes.CLEAR_MESSAGES });
@@ -40,11 +36,9 @@ export const updateUser = async (dispatch, id, inputs, img) => {
 
 export const addUser = async (dispatch, inputs, img) => {
   dispatch({ type: ActionTypes.ADDING_USER });
-  console.log(inputs);
-  console.log(img);
+ 
   try {
     const res = await userRequest.post(`/auth/register`, { ...inputs, img });
-    console.log(res.data);
 
     dispatch({ type: ActionTypes.ADD_SUCCESS_USER });
     dispatch({ type: ActionTypes.CLEAR_MESSAGES });
@@ -57,12 +51,10 @@ export const addUser = async (dispatch, inputs, img) => {
 };
 
 export const deleteUser = async (dispatch, id) => {
-  console.log(id);
   dispatch({ type: ActionTypes.DELETING_USER });
 
   try {
     const res = await userRequest.delete(`/users/${id}`);
-    console.log(res.data);
     if (res) {
       getUsers(dispatch);
     }

@@ -58,7 +58,6 @@ describe("Navbar", () => {
   it("should render all categories when product buttom clicked", async () => {
     render(<MockNavbar />);
     const buttonElement = screen.getByText(/מוצרים/i);
-    console.log(buttonElement);
     fireEvent.click(buttonElement);
 
     categoriesList.forEach((name) => {

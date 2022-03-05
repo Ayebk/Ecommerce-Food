@@ -6,18 +6,14 @@ import { logoutReset, logoutSuccess } from "./authActions";
 export const getCart = async (dispatch, loggedUser) => {
   dispatch({ type: ActionTypes.LOADING_CART });
 
-  console.log(loggedUser);
   try {
     const res = await userRequest.get(`carts/find/` + loggedUser);
     const quantity = res.data.length;
-    console.log(res);
 
     let payload = res.data;
 
-    console.log(payload);
     dispatch({ type: ActionTypes.SYNC_DB_CART, payload });
   } catch (error) {
-    console.log(error);
     dispatch(returnErrors(error.response));
   }
 };
@@ -59,7 +55,6 @@ export const clearCart = () => {
 export const updateCart = async (dispatch, cart, loggedUser, loggingOut) => {
   if (!loggingOut) {
     dispatch({ type: ActionTypes.UPDATE_CART });
-    console.log(cart);
     try {
       userRequest.put(`carts/` + loggedUser.id, {
         userId: loggedUser.id,

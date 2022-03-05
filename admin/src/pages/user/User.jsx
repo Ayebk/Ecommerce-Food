@@ -75,7 +75,6 @@ export default function User() {
 
   useEffect(() => {
     if (error) {
-      console.log("wwwwwwwwwww");
       handleClickError();
       handleClose();
     }
@@ -96,7 +95,6 @@ export default function User() {
     data.append("file", img);
     data.append("upload_preset", "e-commerce");
     data.append("cloud_name", "dzy0uevma");
-    console.log(imgUrl);
     try {
       if (img) {
         axios

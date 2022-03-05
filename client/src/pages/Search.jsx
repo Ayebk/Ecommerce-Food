@@ -81,7 +81,6 @@ const Search = () => {
     searchProducts(dispatch, text);
   }, [text]);
 
-  console.log(products?.length);
 
   return (
     <Container>

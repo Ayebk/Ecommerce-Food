@@ -53,9 +53,7 @@ export default function Home() {
     getStats();
   }, []);
 
-  useEffect(() => {
-    console.log(userStats);
-  }, [userStats]);
+
 
 
   return (

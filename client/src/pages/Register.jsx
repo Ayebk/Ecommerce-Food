@@ -132,7 +132,6 @@ const Register = () => {
 
   const handleSumbit = async (e) => {
     e.preventDefault();
-    console.log(password);
     if (password != passwordAgain) {
     } else {
       const res = await registerUser(dispatch, { username, email, password });

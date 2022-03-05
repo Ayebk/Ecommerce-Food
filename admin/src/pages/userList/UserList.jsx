@@ -35,7 +35,6 @@ export default function UserList() {
 
   useEffect(() => {}, [dispatch]);
 
-  console.log(users);
 
   const handleDelete = (id) => {
     deleteUser(dispatch, id);

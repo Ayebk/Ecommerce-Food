@@ -492,7 +492,6 @@ const Navbar = () => {
   };
 
   function navSearchPage(text) {
-    console.log(text);
     if (text) navigate(`/search/${text}`);
   }
 

@@ -66,7 +66,6 @@ export default function NewUser() {
 
   useEffect(() => {
     if (error) {
-      console.log("wwwwwwwwwww");
       handleClickError();
       handleClose();
     }
@@ -99,7 +98,6 @@ export default function NewUser() {
     }
   };
 
-  console.log(imgUrl);
   const handleChange = (e) => {
     setInputs((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
@@ -109,7 +107,6 @@ export default function NewUser() {
 
   useEffect(() => {
     if (!isFirstRun.current) {
-      console.log("bbbbbbbbb");
       addUser(dispatch, inputs, imgUrl);
     }
   }, [imgUrl]);

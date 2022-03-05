@@ -60,7 +60,6 @@ export default function Product() {
 
   useEffect(() => {
     return () => {
-      console.log("xcdxdxdxdxdxdxd");
       isFirstRun.current = true;
     };
   });
@@ -142,7 +141,6 @@ export default function Product() {
           return a._id - b._id;
         });
         list.map((item) => {
-          console.log(item.Sales);
           setProductsStats((prev) => [
             ...prev,
             { name: months[item._id - 1], Sales: item.total },

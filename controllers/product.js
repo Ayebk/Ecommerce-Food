@@ -9,7 +9,6 @@ const routes = {
 
   createProduct: async (req, res) => {
     const newProduct = new Product(req.body);
-    console.log("llllllaaaaaaaaaaaa =======  " + JSON.stringify(req.body));
     try {
       const savedProduct = await newProduct.save();
       res.status(200).json(savedProduct);
@@ -20,9 +19,7 @@ const routes = {
 
   //UPDATE
   updatedProduct: async (req, res) => {
-    console.log(
-      "tttttttttttttttttttttt ---------   " + JSON.stringify(req.body)
-    );
+
     try {
       const updatedProduct = await Product.findByIdAndUpdate(
         req.params.id,

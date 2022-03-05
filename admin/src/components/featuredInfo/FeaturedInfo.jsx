@@ -20,7 +20,6 @@ export default function FeaturedInfo() {
     const getIncome = async () => {
       try {
         const res = await userRequest.get("orders/revanue");
-        console.log(res.data);
         setIncome(res.data.find((p) => p._id == "2"));
         setPerc(
           (res.data.find((p) => p._id == "2").total * 100) /
@@ -43,7 +42,6 @@ export default function FeaturedInfo() {
     const getIncome = async () => {
       try {
         const res = await userRequest.get("orders/incomeApproved");
-        console.log(res.data);
         setIncomeSales(res.data.find((p) => p._id == "2"));
         setPercSales(
           (res.data.find((p) => p._id == "2").total * 100) /

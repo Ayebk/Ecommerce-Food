@@ -76,7 +76,6 @@ export default function NewProduct() {
   };
 
   useEffect(() => {
-    console.log(isFirstRun.current);
     return () => {
       isFirstRun.current = true;
     };
@@ -124,7 +123,6 @@ export default function NewProduct() {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    console.log(imgUrl);
     await postDetails();
   };
 

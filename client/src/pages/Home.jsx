@@ -120,8 +120,6 @@ const Home = () => {
     lastProducts(dispatch);
   }, [dispatch]);
 
-  console.log(products);
-
   return (
     <Container>
       <AdminAd>
