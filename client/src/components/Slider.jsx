@@ -211,7 +211,6 @@ const Slider = (props) => {
   const nav = (link) => {
     navigate(link);
   };
-  console.log(sliders)
 
   return (
     <Container>

@@ -9,7 +9,7 @@ const BASE_URL = "https://ecommerce-food-production.herokuapp.com/api/";
 //     : "http://localhost:5000/api/";
 
 
-console.log(BASE_URL)
+
   
 export const publicRequest = axios.create({
   baseURL: BASE_URL,
