@@ -23,7 +23,7 @@ mongoose
   });
 
 
-app.use(cors({ origin: "https://ecommerce-food-production.herokuapp.com", credentials: true }))
+app.use(cors({ origin: "https://ecommerce-food-production.herokuapp.com/api/", credentials: true }))
 app.use(express.json());
 app.use(morgan("dev"));
 
