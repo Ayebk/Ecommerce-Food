@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://ecommerce-food-heroku.herokuapp.com/api/";
+const BASE_URL = "https://ecommerce-food-production.herokuapp.com/api/"; 
 
 export const publicRequest = axios.create({
   baseURL: BASE_URL,
