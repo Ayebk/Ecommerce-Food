@@ -23,7 +23,7 @@ mongoose
   });
 
 
-app.use(cors({ origin: "https://workflow-team-heroku-vyekffs62.herokuapp.com/", credentials: true })));
+app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
